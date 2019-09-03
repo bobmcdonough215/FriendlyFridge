@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const db = require("../models/index.js");
+const Food = require("../models/food.js");
 
 // This file empties the food collection and inserts the food below
 
@@ -17,9 +17,9 @@ const foodSeed = [
   }
 ];
 
-db.Food
+Food
   .remove({})
-  .then(() => db.Food.collection.insertMany(foodSeed))
+  .then(() => Food.collection.insertMany(foodSeed))
   .then(data => {
     console.log(data.result.n + " records inserted!");
     process.exit(0);
