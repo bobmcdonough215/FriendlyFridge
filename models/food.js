@@ -8,6 +8,6 @@ const foodSchema = new Schema({
   date: { type: Date, default: Date.now }
 });
 
-const Food = mongoose.model("Book", foodSchema);
+const Food = mongoose.model("Food", foodSchema);
 
 module.exports = Food;
