@@ -15,10 +15,17 @@ if (process.env.NODE_ENV === "production") {
 }
 
 // Define API routes here
-app.use(routes);
+// app.use(routes);
 
 // Connect to the Mongo DB
-mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/virtualFridge");
+const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/virtualFridge";
+mongoose.connect(MONGODB_URI, { useNewUrlParser: true });
+
+mongoose.connection.once("open", function(){
+  console.log("Connection has been made to the database");
+}).on("error", function(error){
+  console.log("Connection error:", error);
+})
 
 // Send every other request to the React app
 // Define any API routes before this runs
