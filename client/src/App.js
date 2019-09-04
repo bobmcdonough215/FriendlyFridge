@@ -11,9 +11,9 @@ function App() {
       <div>
         <Nav/>
         <Switch>
-          <Route exact path="/" Component={login} />
-          <Route exact path="/myfridge" Component={myfridge} />
-          <Route exact path="/camera" Component={camera} />
+          <Route exact path="/" component={login} />
+          <Route exact path="/myfridge" component={myfridge} />
+          <Route exact path="/camera" component={camera} />
         </Switch>
       </div>
     </Router>
