@@ -26,5 +26,13 @@
     "mongod": "^2.0.0",
     "mongoose": "^5.6.11",
     "react-router-dom": "^5.0.1"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bobmcdonough215/finalproject.git"
+  },
+  "bugs": {
+    "url": "https://github.com/bobmcdonough215/finalproject/issues"
+  },
+  "homepage": "https://github.com/bobmcdonough215/finalproject#readme"
 }
