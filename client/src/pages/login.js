@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Input, FormBtn } from "../Components/Form";
-import { Container, Col, Row } from "../Components/Grid";
+import axios from 'axios'
 
 
 class login extends Component {
@@ -19,6 +19,28 @@ class login extends Component {
 
     handleFormSubmit = event => {
         event.preventDefault();
+        console.log('sign-up-form, username: ');
+        console.log(this.state.email);
+        // request connection with server below
+        axios.post('/', {
+            email:this.state.email,
+            username: this.state.login,
+            password: this.state.password
+        })
+        .then(response => {
+            console.log(response)
+            if (response.data){
+                console.log('sucessful signup')
+                this.setState({
+                    redirectTo: '/login'
+                })
+            }else{
+                console.log('Sign-up error');
+            }
+        }).catch(error => {
+            console.log('sign up server error: ')
+            console.log(error);
+        })
     }
 
     render() {
