@@ -38,6 +38,14 @@ var UserSchema = new Schema({
     unique: true,
     match: [/.+@.+\..+/, "Please enter a valid e-mail address"]
   },
+
+  fridges: 
+    {
+      // Store ObjectIds in the array
+      type: Schema.Types.ObjectId,
+      // The ObjectIds will refer to the ids in the Note model
+      ref: "Fridge"
+    },
   // `date` must be of type Date. The default value is the current date
   userCreated: {
     type: Date,

@@ -10,9 +10,9 @@ mongoose.connect(
   "mongodb://localhost/virtualFridge"
 );
 
-const foodSeed = [
+const fridgeSeed = [
   {
-    itemName: "",
+    foodItem: "",
     note: "",
     expirationDate: "",
     date: new Date(Date.now())
@@ -22,7 +22,7 @@ const foodSeed = [
 
 Fridge
   .remove({})
-  .then(() => Fridge.collection.insertMany(foodSeed))
+  .then(() => Fridge.collection.insertMany(fridgeSeed))
   .then(data => {
     console.log(data.result.n + " records inserted!");
     process.exit(0);
