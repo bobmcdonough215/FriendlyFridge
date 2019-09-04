@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Input, FormBtn } from "../components/Form";
+import { Input, FormBtn } from "../Components/Form";
 
 
 class login extends Component {
