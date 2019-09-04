@@ -8,6 +8,6 @@ const fridgeSchema = new Schema({
   date: { type: Date, default: Date.now }
 });
 
-const Food = mongoose.model("Food", fridgeSchema);
+const Fridge = mongoose.model("Fridge", fridgeSchema);
 
-module.exports = Food;
+module.exports = Fridge;

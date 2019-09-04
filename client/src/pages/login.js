@@ -4,6 +4,7 @@ import { Input, FormBtn } from "../Components/Form";
 
 class login extends Component {
     state = {
+        email: " ",
         login: " ",
         password: " "
     }
@@ -23,6 +24,12 @@ class login extends Component {
         return (
             <form>
                 <Input
+                    value={this.state.email}
+                    onChange={this.handleInputChange}
+                    name="email"
+                    placeholder="email (required)"
+                />
+                <Input
                     value={this.state.login}
                     onChange={this.handleInputChange}
                     name="username"
@@ -39,7 +46,7 @@ class login extends Component {
                     disabled={!(this.state.login && this.state.password)}
                     onClick={this.handleFormSubmit}
                 >Login</FormBtn>
-    
+
             </form>
         )
     }

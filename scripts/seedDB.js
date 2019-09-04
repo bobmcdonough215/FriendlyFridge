@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const Food = require("../models/food.js");
+const Fridge = require("../models/userFridge.js");
 const User = require("../models/user.js");
 
 
@@ -20,9 +20,9 @@ const foodSeed = [
 ];
 
 
-Food
+Fridge
   .remove({})
-  .then(() => Food.collection.insertMany(foodSeed))
+  .then(() => Fridge.collection.insertMany(foodSeed))
   .then(data => {
     console.log(data.result.n + " records inserted!");
     process.exit(0);
