@@ -1,9 +1,11 @@
 import React, { Component } from "react";
 import { Input, FormBtn } from "../Components/Form";
+import { Container, Col, Row } from "../Components/Grid";
 
 
 class login extends Component {
     state = {
+        email: " ",
         login: " ",
         password: " "
     }
@@ -21,6 +23,12 @@ class login extends Component {
 
     render() {
         return (
+            <Container fluid>
+                <Container>
+                <Row>
+                    <Col size="md-4">
+                    </Col>
+                    <Col size="md-4">
                 <form>
                     <Input
                         value={this.state.login}
@@ -40,9 +48,14 @@ class login extends Component {
                         onClick={this.handleFormSubmit}
                     >Login</FormBtn>
                 </form>
+                </Col>
+                <Col size="md-4">
+                    </Col>
+                </Row>
+                </Container>
+            </Container>
         )
     }
-
 };
 
 export default login;
