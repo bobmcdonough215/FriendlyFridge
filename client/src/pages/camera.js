@@ -4,13 +4,10 @@ import { Container, Row, Col } from "../Components/Grid";
 import API from "../utils/API";
 import DeleteBTN from "../Components/DeleteBtn";
 import { List, ListItem } from "../Components/List";
-<<<<<<< HEAD
 import moment from "moment";
 // import { compareAsc, format } from 'date-fns'
-=======
 import { compareAsc, format } from 'date-fns'
 import "./camera.css"
->>>>>>> 24bc529463f4c79b44b38c5d7147a58f5edf9657
 
 class camera extends Component {
 
