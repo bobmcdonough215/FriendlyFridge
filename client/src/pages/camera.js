@@ -37,8 +37,8 @@ class camera extends Component {
 
     handleFormSubmit = event => {
         event.preventDefault();
-        console.log(this.state.name, format(new Date(this.state.expiration), 'MM/dd/yyyy'), this.state.expiration);
-        // console.log(moment(this.state.expiration, 'DD/MM/YYY'))
+        // console.log(this.state.name, format(new Date(this.state.expiration), 'MM/dd/yyyy'), this.state.expiration);
+        console.log(moment(this.state.expiration, 'DD/MM/YYY'))
         // format(new Date(2014, 1, 11), 'YYYY-MM-dd')
         // if (this.state.name && this.state.expiration) {
         //     API.saveFood({
