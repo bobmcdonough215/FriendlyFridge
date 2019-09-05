@@ -53,6 +53,7 @@ class camera extends Component {
                 <Row>
                     <Col size="md-6">
                 <form>
+                    <div>Input item information here:</div>
                     <Input
                     type="text"
                         value={this.state.name}
@@ -60,6 +61,7 @@ class camera extends Component {
                         name="name"
                         placeholder="username (required)"
                     />
+                    <div>Expiration Date:</div>
                     <Input
                     type="text"
                         value={this.state.expiration}
