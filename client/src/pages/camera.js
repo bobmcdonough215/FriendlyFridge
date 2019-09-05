@@ -6,7 +6,6 @@ import DeleteBTN from "../Components/DeleteBtn";
 import { List, ListItem } from "../Components/List";
 import moment from "moment";
 // import { compareAsc, format } from 'date-fns'
-import { compareAsc, format } from 'date-fns'
 import "./camera.css"
 
 class camera extends Component {
@@ -47,21 +46,8 @@ class camera extends Component {
         console.log(isExpired);
 
        //console.log(moment(new Date(), 'DD/MM/YYYY').isBefore(this.state.expiration, 'DD/MM/YYYY'));
-        if (this.state.name && this.state.expiration) {
-            API.saveFood({
-                foodItem: this.state.name,
-                expirationDate: this.state.expiration
-            })
-            API.updateUseFridge({
+        // console.log(this.state.name, format(new Date(this.state.expiration), 'MM/dd/yyyy'), this.state.expiration);
 
-            })
-                .then(res => {
-                    console.log(res)
-                })
-                .catch(err => console.log(err));
-        }
-
-        console.log(this.state.name, format(new Date(this.state.expiration), 'MM/dd/yyyy'), this.state.expiration);
         // console.log(moment(this.state.expiration, 'DD/MM/YYY'))
         // format(new Date(2014, 1, 11), 'YYYY-MM-dd')
         // if (this.state.name && this.state.expiration) {
@@ -72,7 +58,20 @@ class camera extends Component {
         //         .then(res => this.loadFoods())
         //         .catch(err => console.log(err));
         // }
+       //console.log(moment(new Date(), 'DD/MM/YYYY').isBefore(this.state.expiration, 'DD/MM/YYYY'));
+       if (this.state.name && this.state.expiration) {
+        API.saveFood({
+            foodItem: this.state.name,
+            expirationDate: this.state.expiration
+        })
+        API.updateUseFridge({
 
+        })
+            .then(res => {
+                console.log(res)
+            })
+            .catch(err => console.log(err));
+    }
     };
 
     render() {
