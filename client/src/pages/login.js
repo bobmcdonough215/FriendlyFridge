@@ -81,12 +81,12 @@ class login extends Component {
                                 disabled={!(this.state.login && this.state.password)}
                                 onClick={this.handleFormSubmit}
                             >Login</FormBtn>
-                            <div className="sign-up">
+                            {/* <div className="sign-up"> */}
                             <FormBtn
                                 disabled={!(this.state.firstName && this.state.lastName)}
                                 onClick={this.handleFormSubmit}
                             >Sign Up</FormBtn>
-                            </div>
+                            {/* </div> */}
                         </div>
                     </form>
                 </div>
