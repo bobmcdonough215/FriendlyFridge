@@ -9,7 +9,6 @@ import { Link } from "react-router-dom";
 class signup extends Component {
     state = {
         email: "",
-        login: "",
         password: "",
         firstName: "",
         lastName: ""
@@ -29,7 +28,6 @@ class signup extends Component {
         // request connection with server below
         axios.post('/', {
             email: this.state.email,
-            username: this.state.login,
             password: this.state.password
         })
             .then(response => {
@@ -75,13 +73,6 @@ class signup extends Component {
                                 onChange={this.handleInputChange}
                                 name="lastName"
                                 placeholder="Last Name (required)"
-                            /></div>
-                        <div className="user">Username
-                                     <Input
-                                value={this.state.login}
-                                onChange={this.handleInputChange}
-                                name="login"
-                                placeholder="username (required)"
                             /></div>
                             <div className="user">Email
                                      <Input
