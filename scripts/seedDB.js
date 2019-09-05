@@ -1,5 +1,7 @@
 const mongoose = require("mongoose");
-const Food = require("../models/food.js");
+const db = require("../models");
+
+const Fridge = require("../models/userFridge.js");
 const User = require("../models/user.js");
 
 
@@ -10,9 +12,9 @@ mongoose.connect(
   "mongodb://localhost/virtualFridge"
 );
 
-const foodSeed = [
+const fridgeSeed = [
   {
-    itemName: "",
+    foodItem: "",
     note: "",
     expirationDate: "",
     date: new Date(Date.now())
@@ -20,9 +22,9 @@ const foodSeed = [
 ];
 
 
-Food
+db.Fridge
   .remove({})
-  .then(() => Food.collection.insertMany(foodSeed))
+  .then(() => db.Fridge.collection.insertMany(fridgeSeed))
   .then(data => {
     console.log(data.result.n + " records inserted!");
     process.exit(0);
@@ -39,9 +41,9 @@ Food
     }
   ];
 
-  User
+  db.User
   .remove({})
-  .then(() => User.collection.insertMany(userSeed))
+  .then(() => db.User.collection.insertMany(userSeed))
   .then(data => {
     console.log(data.result.n + " records inserted!");
     process.exit(0);
