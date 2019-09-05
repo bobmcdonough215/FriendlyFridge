@@ -43,7 +43,6 @@ class camera extends Component {
 
     handleFormSubmit = event => {
         event.preventDefault();
-<<<<<<< HEAD
         // console.log(this.state.name, format(new Date(this.state.expiration), 'MM/dd/yyyy'), this.state.expiration);
         //console.log(moment(this.state.expiration, 'DD/MM/YYYY'));
 
@@ -51,7 +50,6 @@ class camera extends Component {
         console.log(isExpired);
 
        //console.log(moment(new Date(), 'DD/MM/YYYY').isBefore(this.state.expiration, 'DD/MM/YYYY'));
-=======
         if (this.state.name && this.state.expiration) {
             API.saveFood({
                 foodItem: this.state.name,
@@ -68,7 +66,6 @@ class camera extends Component {
 
         console.log(this.state.name, format(new Date(this.state.expiration), 'MM/dd/yyyy'), this.state.expiration);
         // console.log(moment(this.state.expiration, 'DD/MM/YYY'))
->>>>>>> 24bc529463f4c79b44b38c5d7147a58f5edf9657
         // format(new Date(2014, 1, 11), 'YYYY-MM-dd')
         // if (this.state.name && this.state.expiration) {
         //     API.saveFood({
