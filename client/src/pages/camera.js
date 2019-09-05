@@ -44,10 +44,8 @@ class camera extends Component {
             API.saveFood({
                 foodItem: this.state.name,
                 expirationDate: this.state.expiration
-            })
-            API.updateUseFridge({
-                
-            })
+            })                
+        
                 .then(res => {
                     console.log(res)
                 })
@@ -75,6 +73,8 @@ class camera extends Component {
         //         .then(res => this.loadFoods())
         //         .catch(err => console.log(err));
         // }
+
+
         // console.log(moment(new Date(), 'DD/MM/YYYY').isBefore(this.state.expiration, 'DD/MM/YYYY'));
         if (this.state.name && this.state.expiration) {
             API.saveFood({
@@ -89,6 +89,7 @@ class camera extends Component {
                 })
                 .catch(err => console.log(err));
         }
+
     };
 
     render() {
