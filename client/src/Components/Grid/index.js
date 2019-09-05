@@ -1,7 +1,8 @@
 import React from "react";
+import "./style.css";
 
 export function Container({ fluid, children }) {
-  return <div className={`container${fluid ? "-fluid" : ""}`}>{children}</div>;
+  return <div className="container-style" className={`container${fluid ? "-fluid" : ""}`}>{children}</div>;
 }
 
 export function Row({ fluid, children }) {
