@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Input, FormBtn } from "../Components/Form";
+import { Input, FormBtn, } from "../Components/Form";
 import axios from 'axios';
 // import { Container, Row, Col } from "../Components/Grid";
 import "./login.css";
@@ -9,7 +9,9 @@ class login extends Component {
     state = {
         email: " ",
         login: " ",
-        password: " "
+        password: " ",
+        firstName: " ",
+        lastName: " "
     }
 
     handleInputChange = event => {
@@ -74,11 +76,17 @@ class login extends Component {
                                 name="password"
                                 placeholder="password (required)"
                             /></div>
-                        <div className="button">
+                        <div className="buttonContainer">
                             <FormBtn
                                 disabled={!(this.state.login && this.state.password)}
                                 onClick={this.handleFormSubmit}
                             >Login</FormBtn>
+                            <div className="sign-up">
+                            <FormBtn
+                                disabled={!(this.state.firstName && this.state.lastName)}
+                                onClick={this.handleFormSubmit}
+                            >Sign Up</FormBtn>
+                            </div>
                         </div>
                     </form>
                 </div>
