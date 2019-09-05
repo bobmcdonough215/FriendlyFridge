@@ -11,3 +11,4 @@ const fridgeSchema = new Schema({
 const Fridge = mongoose.model("Fridge", fridgeSchema);
 
 module.exports = Fridge;
+

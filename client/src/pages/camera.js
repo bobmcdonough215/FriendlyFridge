@@ -1,11 +1,92 @@
 import React, { Component } from "react";
+import { Input, FormBtn } from "../Components/Form";
+import { Container, Row, Col } from "../Components/Grid";
+import API from "../utils/API";
+import DeleteBTN from "../Components/DeleteBtn";
+import { List, ListItem } from "../Components/List";
 
 class camera extends Component {
+
+    state = {
+        foods: [],
+        name: " ",
+        expiration: " "
+    }
+
+    handleInputChange = event => {
+        const { name, value } = event.target;
+        this.setState({
+            [name]: value
+        });
+    };
+
+    loadFoods = () => {
+        API.getFoods()
+        .then(res =>
+            this.setState({ foods: res.data, name: "", expiration: ""})
+            )
+            .catch(err => console.log(err));
+    };
+
+    deleteFood = id => {
+        API.deleteFood(id)
+        .then(res => this.loadFoods())
+        .catch(err => console.log(err));
+    };
+
+    handleFormSubmit = event => {
+        event.preventDefault();
+        if (this.state.name && this.state.expiration) {
+            API.saveFood({
+                name: this.state.name,
+                expiration: this.state.expiration
+            })
+            .then(res => this.loadFoods())
+            .catch(err => console.log(err));
+        }
+    };
+
     render() {
         return (
-            <div className="container">
-                Camera Page
-            </div>
+            <Container fluid>
+                <Container>
+                <Row>
+                    <Col size="md-6">
+                <form>
+                    <Input
+                        value={this.state.name}
+                        onChange={this.handleInputChange}
+                        name="food"
+                        placeholder="food item (required)"
+                    />
+                    <Input
+                        value={this.state.expiration}
+                        onChange={this.handleInputChange}
+                        name="expiration"
+                        placeholder="expiration date (required)"
+                    />
+                    <FormBtn
+                        disabled={!(this.state.name && this.state.expiration)}
+                        onClick={this.handleFormSubmit}
+                    >Add Food</FormBtn>
+                </form>
+                </Col>
+                <Col size="md-6">
+                    {this.state.foods.length ? (
+                        <List>
+                            {this.state.foods.map(food => (
+                                <ListItem key={food._id}>
+                                    <DeleteBTN onClick={() => this.deleteFood(food._id)} />
+                                </ListItem>
+                            ))}
+                        </List>
+                    ) : (
+                        <h3>No Results to Display</h3>
+                    )}
+                    </Col>
+                </Row>
+                </Container>
+            </Container>
         )
     }
 }

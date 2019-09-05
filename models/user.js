@@ -1,4 +1,6 @@
 var mongoose = require("mongoose");
+const bcrypt = require('bcrypt');
+
 
 // Save a reference to the Schema constructor
 var Schema = mongoose.Schema;
@@ -55,6 +57,14 @@ var UserSchema = new Schema({
 
 // This creates our model from the above schema, using mongoose's model method
 var User = mongoose.model("User", UserSchema);
+
+UserSchema.methods.generateHash = (password) => 
+    bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
+
+UserSchema.methods.validPassword = function(password) {
+  console.log(this.password);
+  return bcrypt.compareSync(password, this.password);
+};
 
 // Export the User model
 module.exports = User;
