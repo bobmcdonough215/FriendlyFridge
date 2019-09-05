@@ -21,22 +21,37 @@ class camera extends Component {
         });
     };
 
-    loadFoods = () => {
-        API.getFoods()
-            .then(res =>
-                this.setState({ foods: res.data, name: "", expiration: "" })
-            )
-            .catch(err => console.log(err));
-    };
+    // loadFoods = () => {
+    //     API.getFoods()
+    //         .then(res =>
+    //             this.setState({ foods: res.data, name: "", expiration: "" })
+    //         )
+    //         .catch(err => console.log(err));
+    // };
 
-    deleteFood = id => {
-        API.deleteFood(id)
-            .then(res => this.loadFoods())
-            .catch(err => console.log(err));
-    };
+    // deleteFood = id => {
+    //     API.deleteFood(id)
+    //         .then(res => this.loadFoods())
+    //         .catch(err => console.log(err));
+    // };
 
     handleFormSubmit = event => {
         event.preventDefault();
+app.js
+        if (this.state.name && this.state.expiration) {
+            API.saveFood({
+                foodItem: this.state.name,
+                expirationDate: this.state.expiration
+            })
+            API.updateUseFridge({
+                
+            })
+                .then(res => {
+                    console.log(res)
+                })
+                .catch(err => console.log(err));
+        }
+
         console.log(this.state.name, format(new Date(this.state.expiration), 'MM/dd/yyyy'), this.state.expiration);
         // console.log(moment(this.state.expiration, 'DD/MM/YYY'))
         // format(new Date(2014, 1, 11), 'YYYY-MM-dd')
@@ -48,6 +63,7 @@ class camera extends Component {
         //         .then(res => this.loadFoods())
         //         .catch(err => console.log(err));
         // }
+
     };
 
     render() {
