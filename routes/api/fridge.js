@@ -1,12 +1,12 @@
 const router = require("express").Router();
 const foodController = require("../../controllers/foodController");
 
-// Matches with "/api/books"
+
 router.route("/")
   .get(foodController.findAll)
   .post(foodController.create);
 
-// Matches with "/api/books/:id"
+
 router
   .route("/:id")
   .get(foodController.findById)
@@ -14,3 +14,16 @@ router
   .delete(foodController.remove);
 
 module.exports = router;
+
+
+// api call
+$(document).on("click", function(){
+  var apiKey = "AIzaSyBdUWP93ehzmp-KWJj89ogweoQDrEp9Efs";
+    var queryURL = "https://www.googleapis.com/customsearch/v1" + "&api_key=" + apiKey  + "search=image" + "q=" + netflixShow;
+// + "imgSize=icon" + "imgType=photo"
+})
+$.ajax({
+  url: queryURL,
+  method: "GET"
+})
+// 
