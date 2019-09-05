@@ -1,0 +1,44 @@
+.user {
+    color: black;
+}
+
+.password {
+    color: black;
+}
+
+.buttonContainer {
+    width: 50%;
+    align-content: center;
+}
+
+.container {
+    padding: 7%;
+    width: 50%;
+    background-color: rgba(0, 0, 0, 0.2);
+    margin-top: 5%;
+    align-content: center;
+    
+
+}
+
+.welcome {
+    color: white;
+    text-align: center;
+    margin: 5%;
+}
+
+.sign-up {
+
+}
+
+/* .background {
+    background-image: url("../Components/images/jakub-kapusnak-vnNFWKY7Tj4-unsplash.jpg");
+    background-size: cover;
+    width: 100%;
+    height: auto;
+} */
+
+/* .container-bg{
+    background-image: url("../Components/images/jakub-kapusnak-vnNFWKY7Tj4-unsplash.jpg")
+} */
+

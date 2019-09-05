@@ -1,12 +1,12 @@
 const router = require("express").Router();
 const foodController = require("../../controllers/foodController");
 
-// Matches with "/api/books"
+
 router.route("/")
   .get(foodController.findAll)
   .post(foodController.create);
 
-// Matches with "/api/books/:id"
+
 router
   .route("/:id")
   .get(foodController.findById)
@@ -14,3 +14,5 @@ router
   .delete(foodController.remove);
 
 module.exports = router;
+
+
