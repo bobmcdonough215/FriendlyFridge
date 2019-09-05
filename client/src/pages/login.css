@@ -7,8 +7,7 @@
 }
 
 .buttonContainer {
-    width: 50%;
-    align-content: center;
+    text-align: center;
 }
 
 .container {
@@ -27,9 +26,9 @@
     margin: 5%;
 }
 
-.sign-up {
+/* .sign-up {
 
-}
+} */
 
 /* .background {
     background-image: url("../Components/images/jakub-kapusnak-vnNFWKY7Tj4-unsplash.jpg");

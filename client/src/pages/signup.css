@@ -1,0 +1,27 @@
+.user {
+    color: white;
+}
+
+.password {
+    color: white;
+}
+
+.buttonContainer {
+    text-align: center;
+}
+
+.container {
+    padding: 7%;
+    width: 50%;
+    background-color: rgba(0, 0, 0, 0.2);
+    margin-top: 5%;
+    align-content: center;
+    
+
+}
+
+.welcome {
+    color: white;
+    text-align: center;
+    margin: 5%;
+}
