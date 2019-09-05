@@ -1,3 +1,4 @@
+
 import axios from "axios";
 
 export default {
@@ -8,4 +9,7 @@ export default {
       console.log(fridgeData)
     return axios.post("/api/fridge", fridgeData);
   }
+
+
 };
+

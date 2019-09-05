@@ -39,6 +39,19 @@ class camera extends Component {
 
     handleFormSubmit = event => {
         event.preventDefault();
+
+        if (this.state.name && this.state.expiration) {
+            API.saveFood({
+                foodItem: this.state.name,
+                expirationDate: this.state.expiration
+            })                
+        
+                .then(res => {
+                    console.log(res)
+                })
+                .catch(err => console.log(err));
+        }
+
         // console.log(this.state.name, format(new Date(this.state.expiration), 'MM/dd/yyyy'), this.state.expiration);
         //console.log(moment(this.state.expiration, 'DD/MM/YYYY'));
 
@@ -48,6 +61,7 @@ class camera extends Component {
 
         //console.log(moment(new Date(), 'DD/MM/YYYY').isBefore(this.state.expiration, 'DD/MM/YYYY'));
         // console.log(this.state.name, format(new Date(this.state.expiration), 'MM/dd/yyyy'), this.state.expiration);
+
 
         // console.log(moment(this.state.expiration, 'DD/MM/YYY'))
         // format(new Date(2014, 1, 11), 'YYYY-MM-dd')
@@ -59,6 +73,8 @@ class camera extends Component {
         //         .then(res => this.loadFoods())
         //         .catch(err => console.log(err));
         // }
+
+
         // console.log(moment(new Date(), 'DD/MM/YYYY').isBefore(this.state.expiration, 'DD/MM/YYYY'));
         if (this.state.name && this.state.expiration) {
             API.saveFood({
@@ -73,6 +89,7 @@ class camera extends Component {
                 })
                 .catch(err => console.log(err));
         }
+
     };
 
     render() {
