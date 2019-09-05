@@ -53,12 +53,14 @@ class login extends Component {
                     </Col>
                     <Col size="md-4">
                 <form>
+                    <div>Username</div>
                     <Input
                         value={this.state.login}
                         onChange={this.handleInputChange}
-                        name="username"
+                        name="login"
                         placeholder="username (required)"
                     />
+                    <div>Password</div>
                     <Input
                         type="password"
                         value={this.state.password}
