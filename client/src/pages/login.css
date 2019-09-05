@@ -6,8 +6,9 @@
     color: black;
 }
 
-.button {
+.buttonContainer {
     width: 50%;
+    align-content: center;
 }
 
 .container {
@@ -15,6 +16,9 @@
     width: 50%;
     background-color: rgba(0, 0, 0, 0.2);
     margin-top: 5%;
+    align-content: center;
+    
+
 }
 
 .welcome {
@@ -23,4 +27,18 @@
     margin: 5%;
 }
 
-.image { background: url(/client/public/dino-reichmuth-kk3W5-0b6e0-unsplash.jpg)}
+.sign-up {
+
+}
+
+/* .background {
+    background-image: url("../Components/images/jakub-kapusnak-vnNFWKY7Tj4-unsplash.jpg");
+    background-size: cover;
+    width: 100%;
+    height: auto;
+} */
+
+/* .container-bg{
+    background-image: url("../Components/images/jakub-kapusnak-vnNFWKY7Tj4-unsplash.jpg")
+} */
+

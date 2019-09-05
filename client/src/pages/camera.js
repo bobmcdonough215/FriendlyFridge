@@ -4,13 +4,14 @@ import { Container, Row, Col } from "../Components/Grid";
 import API from "../utils/API";
 import DeleteBTN from "../Components/DeleteBtn";
 import { List, ListItem } from "../Components/List";
+import { compareAsc, format } from 'date-fns'
 
 class camera extends Component {
 
     state = {
         foods: [],
-        name: " ",
-        expiration: " "
+        name: "",
+        expiration: ""
     }
 
     handleInputChange = event => {
@@ -36,14 +37,17 @@ class camera extends Component {
 
     handleFormSubmit = event => {
         event.preventDefault();
-        if (this.state.name && this.state.expiration) {
-            API.saveFood({
-                name: this.state.name,
-                expiration: this.state.expiration
-            })
-                .then(res => this.loadFoods())
-                .catch(err => console.log(err));
-        }
+        console.log(this.state.name, format(new Date(this.state.expiration), 'MM/dd/yyyy'), this.state.expiration);
+        // console.log(moment(this.state.expiration, 'DD/MM/YYY'))
+        // format(new Date(2014, 1, 11), 'YYYY-MM-dd')
+        // if (this.state.name && this.state.expiration) {
+        //     API.saveFood({
+        //         name: this.state.name,
+        //         expiration: this.state.expiration
+        //     })
+        //         .then(res => this.loadFoods())
+        //         .catch(err => console.log(err));
+        // }
     };
 
     render() {
@@ -59,7 +63,7 @@ class camera extends Component {
                                     value={this.state.name}
                                     onChange={this.handleInputChange}
                                     name="name"
-                                    placeholder="username (required)"
+                                    placeholder="food item (required)"
                                 />
                                 <div>Expiration Date:</div>
                                 <Input

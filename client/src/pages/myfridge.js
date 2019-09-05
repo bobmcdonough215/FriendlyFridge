@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import DeleteBtn from "../Components/DeleteBtn";
 import API from "../utils/API";
 import AddFoodBtn from "../Components/AddFoodBtn";
+import "./myfridge.css";
 
 class myfridge extends Component {
 
@@ -31,7 +32,7 @@ class myfridge extends Component {
     render() {
         return (
             <Container>
-                <h3>Your Fridge</h3>
+                <h3 className="text-style">Your Fridge</h3>
                 <Container>
                     {this.state.foods.length ? (
                         <List>
@@ -42,7 +43,7 @@ class myfridge extends Component {
                             ))}
                         </List>
                     ) : (
-                            <h3>There is nothing in your fridge</h3>
+                            <h3 className="text-style">There is nothing in your fridge</h3>
                         )}
                 </Container>
                 <Link to="/camera" >
