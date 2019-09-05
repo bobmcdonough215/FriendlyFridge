@@ -5,8 +5,8 @@ import API from "../utils/API";
 import DeleteBTN from "../Components/DeleteBtn";
 import { List, ListItem } from "../Components/List";
 import moment from "moment";
-// import { compareAsc, format } from 'date-fns'
-import "./camera.css"
+import { format } from 'date-fns';
+import "./camera.css";
 
 class camera extends Component {
 
@@ -45,7 +45,8 @@ class camera extends Component {
         var isExpired = moment(new Date(), 'DD/MM/YYYY').isBefore(this.state.expiration, 'DD/MM/YYYY');
         console.log(isExpired);
 
-       //console.log(moment(new Date(), 'DD/MM/YYYY').isBefore(this.state.expiration, 'DD/MM/YYYY'));
+
+        //console.log(moment(new Date(), 'DD/MM/YYYY').isBefore(this.state.expiration, 'DD/MM/YYYY'));
         // console.log(this.state.name, format(new Date(this.state.expiration), 'MM/dd/yyyy'), this.state.expiration);
 
         // console.log(moment(this.state.expiration, 'DD/MM/YYY'))
@@ -58,20 +59,20 @@ class camera extends Component {
         //         .then(res => this.loadFoods())
         //         .catch(err => console.log(err));
         // }
-       //console.log(moment(new Date(), 'DD/MM/YYYY').isBefore(this.state.expiration, 'DD/MM/YYYY'));
-       if (this.state.name && this.state.expiration) {
-        API.saveFood({
-            foodItem: this.state.name,
-            expirationDate: this.state.expiration
-        })
-        API.updateUseFridge({
-
-        })
-            .then(res => {
-                console.log(res)
+        // console.log(moment(new Date(), 'DD/MM/YYYY').isBefore(this.state.expiration, 'DD/MM/YYYY'));
+        if (this.state.name && this.state.expiration) {
+            API.saveFood({
+                foodItem: this.state.name,
+                expirationDate: this.state.expiration
             })
-            .catch(err => console.log(err));
-    }
+            API.updateUseFridge({
+
+            })
+                .then(res => {
+                    console.log(res)
+                })
+                .catch(err => console.log(err));
+        }
     };
 
     render() {
@@ -103,7 +104,7 @@ class camera extends Component {
                                         onClick={this.handleFormSubmit}
                                     >Add Food</FormBtn>
                                 </form>
-                                </div>
+                            </div>
                         </Col>
                         <Col size="md-6">
                             {this.state.foods.length ? (
@@ -115,8 +116,8 @@ class camera extends Component {
                                     ))}
                                 </List>
                             ) : (
-                                <div className="results">
-                                    <h3>No Results to Display</h3>
+                                    <div className="results">
+                                        <h3>No Results to Display</h3>
                                     </div>
                                 )}
                         </Col>
