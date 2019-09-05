@@ -31,9 +31,8 @@ class myfridge extends Component {
 
     render() {
         return (
-            <Container>
-                <h3 className="text-style">Your Fridge</h3>
-                <Container>
+            <div className="outer-fridge">
+                <h3 className="title-style">Your Fridge</h3>
                     {this.state.foods.length ? (
                         <List>
                             {this.state.foods.map(food => (
@@ -43,13 +42,23 @@ class myfridge extends Component {
                             ))}
                         </List>
                     ) : (
-                            <h3 className="text-style">There is nothing in your fridge</h3>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <h3>Your fridge is empty!</h3>
+                                            <ul id="fridge-foods"></ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         )}
-                </Container>
                 <Link to="/camera" >
-                <AddFoodBtn/>
+                    <div className="button">
+                    <AddFoodBtn />
+                    </div>
                 </Link>
-            </Container>
+            </div>
         )
     }
 }
