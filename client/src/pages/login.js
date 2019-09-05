@@ -64,7 +64,7 @@ class login extends Component {
                         <div className="user">Username
                                      <Input
                                 value={this.state.login}
-                                onChange={this.handleInputChange} ß
+                                onChange={this.handleInputChange}
                                 name="login"
                                 placeholder="username (required)"
                             /></div>
