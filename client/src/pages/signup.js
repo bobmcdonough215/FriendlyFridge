@@ -2,14 +2,17 @@ import React, { Component } from "react";
 import { Input, FormBtn, } from "../Components/Form";
 import axios from 'axios';
 // import { Container, Row, Col } from "../Components/Grid";
-import "./login.css";
+import "./signup.css";
 import Img from "../Components/images/jakub-kapusnak-vnNFWKY7Tj4-unsplash.jpg";
 import { Link } from "react-router-dom";
 
-class login extends Component {
+class signup extends Component {
     state = {
         email: "",
-        password: ""
+        login: "",
+        password: "",
+        firstName: "",
+        lastName: ""
     }
 
     handleInputChange = event => {
@@ -26,6 +29,7 @@ class login extends Component {
         // request connection with server below
         axios.post('/', {
             email: this.state.email,
+            username: this.state.login,
             password: this.state.password
         })
             .then(response => {
@@ -58,13 +62,34 @@ class login extends Component {
 
                     <div className="welcome"><h2>Welcome to Friendly Fridge!</h2></div>
                     <form>
-                        <div className="user">Email
+                    <div className="user">First name
+                                     <Input
+                                value={this.state.firstName}
+                                onChange={this.handleInputChange}
+                                name="firstName"
+                                placeholder="First Name (required)"
+                            /></div>
+                            <div className="user">Last name
+                                     <Input
+                                value={this.state.lastName}
+                                onChange={this.handleInputChange}
+                                name="lastName"
+                                placeholder="Last Name (required)"
+                            /></div>
+                        <div className="user">Username
+                                     <Input
+                                value={this.state.login}
+                                onChange={this.handleInputChange}
+                                name="login"
+                                placeholder="username (required)"
+                            /></div>
+                            <div className="user">Email
                                      <Input
                                      type="email"
                                 value={this.state.login}
                                 onChange={this.handleInputChange}
                                 name="email"
-                                placeholder="email (required)"
+                                placeholder="Email (required)"
                             /></div>
                         <div className="password">Password
                                      <Input
@@ -75,15 +100,11 @@ class login extends Component {
                                 placeholder="password(required)"
                             /></div>
                         <div className="buttonContainer">
+                        <Link to="/">
                             <FormBtn
-                                disabled={!(this.state.login && this.state.password)}
+                                disabled={!(this.state.firstName && this.state.lastName)}
                                 onClick={this.handleFormSubmit}
-                            >Login</FormBtn>
-                            {/* <div className="sign-up"> */}
-                            <Link to="/signup">
-                            <FormBtn>
-                                Sign Up
-                            </FormBtn>
+                            >Sign Up</FormBtn>
                             </Link>
                             {/* </div> */}
                         </div>
@@ -100,4 +121,4 @@ class login extends Component {
     }
 };
 
-export default login;
+export default signup;
