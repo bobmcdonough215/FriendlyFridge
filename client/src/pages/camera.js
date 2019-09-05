@@ -37,7 +37,7 @@ class camera extends Component {
 
     handleFormSubmit = event => {
         event.preventDefault();
-app.js
+
         if (this.state.name && this.state.expiration) {
             API.saveFood({
                 foodItem: this.state.name,
