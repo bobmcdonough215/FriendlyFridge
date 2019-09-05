@@ -22,16 +22,16 @@ class camera extends Component {
 
     loadFoods = () => {
         API.getFoods()
-        .then(res =>
-            this.setState({ foods: res.data, name: "", expiration: ""})
+            .then(res =>
+                this.setState({ foods: res.data, name: "", expiration: "" })
             )
             .catch(err => console.log(err));
     };
 
     deleteFood = id => {
         API.deleteFood(id)
-        .then(res => this.loadFoods())
-        .catch(err => console.log(err));
+            .then(res => this.loadFoods())
+            .catch(err => console.log(err));
     };
 
     handleFormSubmit = event => {
@@ -41,8 +41,8 @@ class camera extends Component {
                 name: this.state.name,
                 expiration: this.state.expiration
             })
-            .then(res => this.loadFoods())
-            .catch(err => console.log(err));
+                .then(res => this.loadFoods())
+                .catch(err => console.log(err));
         }
     };
 
@@ -50,45 +50,45 @@ class camera extends Component {
         return (
             <Container fluid>
                 <Container>
-                <Row>
-                    <Col size="md-6">
-                <form>
-                    <div>Input item information here:</div>
-                    <Input
-                    type="text"
-                        value={this.state.name}
-                        onChange={this.handleInputChange}
-                        name="name"
-                        placeholder="username (required)"
-                    />
-                    <div>Expiration Date:</div>
-                    <Input
-                    type="text"
-                        value={this.state.expiration}
-                        onChange={this.handleInputChange}
-                        name="expiration"
-                        placeholder="expiration (required)"
-                    />
-                    <FormBtn
-                        disabled={!(this.state.name && this.state.expiration)}
-                        onClick={this.handleFormSubmit}
-                    >Add Food</FormBtn>
-                </form>
-                </Col>
-                <Col size="md-6">
-                    {this.state.foods.length ? (
-                        <List>
-                            {this.state.foods.map(food => (
-                                <ListItem key={food._id}>
-                                    <DeleteBTN onClick={() => this.deleteFood(food._id)} />
-                                </ListItem>
-                            ))}
-                        </List>
-                    ) : (
-                        <h3>No Results to Display</h3>
-                    )}
-                    </Col>
-                </Row>
+                    <Row>
+                        <Col size="md-6">
+                            <form>
+                                <div>Input item information here:</div>
+                                <Input
+                                    type="text"
+                                    value={this.state.name}
+                                    onChange={this.handleInputChange}
+                                    name="name"
+                                    placeholder="username (required)"
+                                />
+                                <div>Expiration Date:</div>
+                                <Input
+                                    type="date"
+                                    value={this.state.expiration}
+                                    onChange={this.handleInputChange}
+                                    name="expiration"
+                                    placeholder="expiration (required)"
+                                />
+                                <FormBtn
+                                    disabled={!(this.state.name && this.state.expiration)}
+                                    onClick={this.handleFormSubmit}
+                                >Add Food</FormBtn>
+                            </form>
+                        </Col>
+                        <Col size="md-6">
+                            {this.state.foods.length ? (
+                                <List>
+                                    {this.state.foods.map(food => (
+                                        <ListItem key={food._id}>
+                                            <DeleteBTN onClick={() => this.deleteFood(food._id)} />
+                                        </ListItem>
+                                    ))}
+                                </List>
+                            ) : (
+                                    <h3>No Results to Display</h3>
+                                )}
+                        </Col>
+                    </Row>
                 </Container>
             </Container>
         )
