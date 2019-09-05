@@ -42,12 +42,12 @@ var UserSchema = new Schema({
   },
 
   fridges: 
-    {
+    [{
       // Store ObjectIds in the array
       type: Schema.Types.ObjectId,
       // The ObjectIds will refer to the ids in the Note model
       ref: "Fridge"
-    },
+    }],
   // `date` must be of type Date. The default value is the current date
   userCreated: {
     type: Date,

@@ -17,7 +17,7 @@ if (process.env.NODE_ENV === "production") {
 }
 
 // Define API routes here
-// app.use(routes);
+app.use(routes);
 
 // Connect to the Mongo DB
 const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/virtualFridge";
@@ -28,7 +28,6 @@ mongoose.connection.once("open", function(){
 }).on("error", function(error){
   console.log("Connection error:", error);
 })
-
 
 // The "unique" rule in the User model's schema will prevent duplicate users from being added to the server
 app.post("/submit", function(req, res) {

@@ -20,29 +20,34 @@ class camera extends Component {
         });
     };
 
-    loadFoods = () => {
-        API.getFoods()
-        .then(res =>
-            this.setState({ foods: res.data, name: "", expiration: ""})
-            )
-            .catch(err => console.log(err));
-    };
+    // loadFoods = () => {
+    //     API.getFoods()
+    //         .then(res =>
+    //             this.setState({ foods: res.data, name: "", expiration: "" })
+    //         )
+    //         .catch(err => console.log(err));
+    // };
 
-    deleteFood = id => {
-        API.deleteFood(id)
-        .then(res => this.loadFoods())
-        .catch(err => console.log(err));
-    };
+    // deleteFood = id => {
+    //     API.deleteFood(id)
+    //         .then(res => this.loadFoods())
+    //         .catch(err => console.log(err));
+    // };
 
     handleFormSubmit = event => {
         event.preventDefault();
         if (this.state.name && this.state.expiration) {
             API.saveFood({
-                name: this.state.name,
-                expiration: this.state.expiration
+                foodItem: this.state.name,
+                expirationDate: this.state.expiration
             })
-            .then(res => this.loadFoods())
-            .catch(err => console.log(err));
+            API.updateUseFridge({
+                
+            })
+                .then(res => {
+                    console.log(res)
+                })
+                .catch(err => console.log(err));
         }
     };
 
@@ -50,41 +55,45 @@ class camera extends Component {
         return (
             <Container fluid>
                 <Container>
-                <Row>
-                    <Col size="md-6">
-                <form>
-                    <Input
-                        value={this.state.name}
-                        onChange={this.handleInputChange}
-                        name="food"
-                        placeholder="username (required)"
-                    />
-                    <Input
-                        value={this.state.expiration}
-                        onChange={this.handleInputChange}
-                        name="expiration"
-                        placeholder="expiration (required)"
-                    />
-                    <FormBtn
-                        disabled={!(this.state.name && this.state.expiration)}
-                        onClick={this.handleFormSubmit}
-                    >Add Food</FormBtn>
-                </form>
-                </Col>
-                <Col size="md-6">
-                    {this.state.foods.length ? (
-                        <List>
-                            {this.state.foods.map(food => (
-                                <ListItem key={food._id}>
-                                    <DeleteBTN onClick={() => this.deleteFood(food._id)} />
-                                </ListItem>
-                            ))}
-                        </List>
-                    ) : (
-                        <h3>No Results to Display</h3>
-                    )}
-                    </Col>
-                </Row>
+                    <Row>
+                        <Col size="md-6">
+                            <form>
+                                <div>Input item information here:</div>
+                                <Input
+                                    type="text"
+                                    value={this.state.name}
+                                    onChange={this.handleInputChange}
+                                    name="name"
+                                    placeholder="username (required)"
+                                />
+                                <div>Expiration Date:</div>
+                                <Input
+                                    type="date"
+                                    value={this.state.expiration}
+                                    onChange={this.handleInputChange}
+                                    name="expiration"
+                                    placeholder="expiration (required)"
+                                />
+                                <FormBtn
+                                    disabled={!(this.state.name && this.state.expiration)}
+                                    onClick={this.handleFormSubmit}
+                                >Add Food</FormBtn>
+                            </form>
+                        </Col>
+                        <Col size="md-6">
+                            {this.state.foods.length ? (
+                                <List>
+                                    {this.state.foods.map(food => (
+                                        <ListItem key={food._id}>
+                                            <DeleteBTN onClick={() => this.deleteFood(food._id)} />
+                                        </ListItem>
+                                    ))}
+                                </List>
+                            ) : (
+                                    <h3>No Results to Display</h3>
+                                )}
+                        </Col>
+                    </Row>
                 </Container>
             </Container>
         )
