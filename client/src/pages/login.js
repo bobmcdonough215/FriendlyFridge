@@ -62,14 +62,14 @@ class login extends Component {
                     <div className="welcome"><h2>Welcome to Friendly Fridge!</h2></div>
                     <form>
                         <div className="user">Username
-                                     <Input
+                                     <input
                                 value={this.state.login}
                                 onChange={this.handleInputChange} ß
                                 name="login"
                                 placeholder="username (required)"
                             /></div>
                         <div className="password">Password
-                                     <Input
+                                     <input
                                 type="password"
                                 value={this.state.password}
                                 onChange={this.handleInputChange}

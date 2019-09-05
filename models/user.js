@@ -1,59 +1,42 @@
-var mongoose = require("mongoose");
-const bcrypt = require('bcrypt');
+const mongoose = require('mongoose')
+const Schema = mongoose.Schema
+const bcrypt = require('bcryptjs');
+mongoose.promise = Promise
 
+// Define userSchema
+const userSchema = new Schema({
 
-// Save a reference to the Schema constructor
-var Schema = mongoose.Schema;
+	username: { type: String, unique: false, required: false },
+	password: { type: String, unique: false, required: false }
 
-// Using the Schema constructor, create a new UserSchema object
-// This is similar to a Sequelize model
-var UserSchema = new Schema({
-  // `username` must be of type String
-  // `username` will trim leading and trailing whitespace before it's saved
-  // `username` is a required field and throws a custom error message if not supplied
-  username: {
-    type: String,
-    trim: true,
-    required: "Username is Required"
-  },
-  // `password` must be of type String
-  // `password` will trim leading and trailing whitespace before it's saved
-  // `password` is a required field and throws a custom error message if not supplied
-  // `password` uses a custom validation function to only accept values 6 characters or more
-  password: {
-    type: String,
-    trim: true,
-    required: "Password is Required",
-    validate: [
-      function(input) {
-        return input.length >= 6;
-      },
-      "Password should be longer."
-    ]
-  },
-  // `email` must be of type String
-  // `email` must be unique
-  // `email` must match the regex pattern below and throws a custom error message if it does not
-  // You can read more about RegEx Patterns here https://www.regexbuddy.com/regex.html
-  email: {
-    type: String,
-    unique: true,
-    match: [/.+@.+\..+/, "Please enter a valid e-mail address"]
-  },
+})
 
-  fridges: 
-    [{
-      // Store ObjectIds in the array
-      type: Schema.Types.ObjectId,
-      // The ObjectIds will refer to the ids in the Note model
-      ref: "Fridge"
-    }],
-  // `date` must be of type Date. The default value is the current date
-  userCreated: {
-    type: Date,
-    default: Date.now
-  }
-});
+// Define schema methods
+userSchema.methods = {
+	checkPassword: function (inputPassword) {
+		return bcrypt.compareSync(inputPassword, this.password)
+	},
+	hashPassword: plainTextPassword => {
+		return bcrypt.hashSync(plainTextPassword, 10)
+	}
+}
+
+// Define hooks for pre-saving
+userSchema.pre('save', function (next) {
+	if (!this.password) {
+		console.log('models/user.js =======NO PASSWORD PROVIDED=======')
+		next()
+	} else {
+		console.log('models/user.js hashPassword in pre save');
+		
+		this.password = this.hashPassword(this.password)
+		next()
+	}
+})
+
+const User = mongoose.model('User', userSchema)
+module.exports = User
+
 
 // This creates our model from the above schema, using mongoose's model method
 var User = mongoose.model("User", UserSchema);
