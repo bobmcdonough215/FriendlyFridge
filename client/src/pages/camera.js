@@ -6,7 +6,7 @@ import DeleteBTN from "../Components/DeleteBtn";
 import { List, ListItem } from "../Components/List";
 import moment from "moment";
 // import { compareAsc, format } from 'date-fns'
-import { compareAsc, format } from 'date-fns'
+import { format } from 'date-fns'
 import "./camera.css"
 
 class camera extends Component {
@@ -45,6 +45,7 @@ class camera extends Component {
 
         var isExpired = moment(new Date(), 'DD/MM/YYYY').isBefore(this.state.expiration, 'DD/MM/YYYY');
         console.log(isExpired);
+        
 
        //console.log(moment(new Date(), 'DD/MM/YYYY').isBefore(this.state.expiration, 'DD/MM/YYYY'));
         if (this.state.name && this.state.expiration) {
