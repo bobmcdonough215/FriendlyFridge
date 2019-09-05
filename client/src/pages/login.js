@@ -7,11 +7,11 @@ import Img from "../Components/images/jakub-kapusnak-vnNFWKY7Tj4-unsplash.jpg";
 
 class login extends Component {
     state = {
-        email: " ",
-        login: " ",
-        password: " ",
-        firstName: " ",
-        lastName: " "
+        email: "",
+        login: "",
+        password: "",
+        firstName: "",
+        lastName: ""
     }
 
     handleInputChange = event => {
@@ -64,7 +64,7 @@ class login extends Component {
                         <div className="user">Username
                                      <Input
                                 value={this.state.login}
-                                onChange={this.handleInputChange} ß
+                                onChange={this.handleInputChange}
                                 name="login"
                                 placeholder="username (required)"
                             /></div>
@@ -74,7 +74,7 @@ class login extends Component {
                                 value={this.state.password}
                                 onChange={this.handleInputChange}
                                 name="password"
-                                placeholder="password (required)"
+                                placeholder="password(required)"
                             /></div>
                         <div className="buttonContainer">
                             <FormBtn
