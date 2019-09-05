@@ -3,40 +3,51 @@ import { Input, FormBtn, } from "../Components/Form";
 import axios from 'axios';
 // import { Container, Row, Col } from "../Components/Grid";
 import "./login.css";
-import Img from "../Components/images/jakub-kapusnak-vnNFWKY7Tj4-unsplash.jpg";
+import { Link } from "react-router-dom";
 
 class login extends Component {
-    state = {
-        email: " ",
-        login: " ",
-        password: " ",
-        firstName: " ",
-        lastName: " "
-    }
+    constructor() {
+        super()
+        state = {
+            email: "",
+            password: "",
+            redirectTo: null
+        }
+        this.handleSubmit = this.handleSubmit.bind(this)
+        this.handleChange = this.handleChange.bind(this)
+    
 
-    handleInputChange = event => {
-        const { name, value } = event.target;
-        this.setState({
-            [name]: value
-        });
-    };
+        handleInputChange = event => {
+            const { name, value } = event.target;
+            this.setState({
+                [name]: value
+            });
+        };
+
+
+    }
 
     handleFormSubmit = event => {
         event.preventDefault();
         console.log('sign-up-form, username: ');
         console.log(this.state.email);
         // request connection with server below
-        axios.post('/', {
+        axios.post('/user/login', {
             email: this.state.email,
-            username: this.state.login,
             password: this.state.password
         })
             .then(response => {
                 console.log(response)
-                if (response.data) {
+                if (response.status === 200) {
                     console.log('sucessful signup')
+                    this.props.updateUser({
+                        loggedIn: true,
+                        username: response.data.username
+
+                    })
+
                     this.setState({
-                        redirectTo: '/login'
+                        redirectTo: '/myfridge'
                     })
                 } else {
                     console.log('Sign-up error');
@@ -48,25 +59,24 @@ class login extends Component {
     }
 
     render() {
+        if (this.state.redirectTo) {
+            return <Redirect to={{ pathname: this.state.redirectTo }} />
+        } else {
+            return (
+                <h4>Login</h4>
+                <div className="form-group">
+                    <div className="background">
+                        <div className="container">
+                        </div>
+                        <div className="welcome"><h2>Welcome to Friendly Fridge!</h2></div>
 
-        return (
-            // <Container fluid>
-            //     <Container>
-            //         <Row>
-            //             <Col size="md-4">
-            //             </Col>
-            //             <Col size="md-4">
-            <div className="background">
-                <div className="container">
-
-                    <div className="welcome"><h2>Welcome to Friendly Fridge!</h2></div>
-                    <form>
-                        <div className="user">Username
-                                     <input
+                        <div className="user">Email
+                                     <Input
+                                type="email"
                                 value={this.state.login}
-                                onChange={this.handleInputChange} ß
-                                name="login"
-                                placeholder="username (required)"
+                                onChange={this.handleInputChange}
+                                name="email"
+                                placeholder="email (required)"
                             /></div>
                         <div className="password">Password
                                      <input
@@ -74,31 +84,20 @@ class login extends Component {
                                 value={this.state.password}
                                 onChange={this.handleInputChange}
                                 name="password"
-                                placeholder="password (required)"
+                                placeholder="password(required)"
                             /></div>
                         <div className="buttonContainer">
                             <FormBtn
                                 disabled={!(this.state.login && this.state.password)}
                                 onClick={this.handleFormSubmit}
                             >Login</FormBtn>
-                            <div className="sign-up">
-                            <FormBtn
-                                disabled={!(this.state.firstName && this.state.lastName)}
-                                onClick={this.handleFormSubmit}
-                            >Sign Up</FormBtn>
-                            </div>
+
                         </div>
-                    </form>
+                    </div>
                 </div>
-            </div>
-            //             </Col>
-            //             <Col size="md-4">
-            //             </Col>
-            //         </Row>
-            //     </Container>
-            // </Container>
-        )
+            )
+        }
     }
-};
+}
 
 export default login;

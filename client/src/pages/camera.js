@@ -4,7 +4,9 @@ import { Container, Row, Col } from "../Components/Grid";
 import API from "../utils/API";
 import DeleteBTN from "../Components/DeleteBtn";
 import { List, ListItem } from "../Components/List";
-import { compareAsc, format } from 'date-fns'
+import moment from "moment";
+import { format } from 'date-fns';
+import "./camera.css";
 
 class camera extends Component {
 
@@ -37,6 +39,7 @@ class camera extends Component {
 
     handleFormSubmit = event => {
         event.preventDefault();
+
         if (this.state.name && this.state.expiration) {
             API.saveFood({
                 foodItem: this.state.name,
@@ -51,7 +54,17 @@ class camera extends Component {
                 .catch(err => console.log(err));
         }
 
-        console.log(this.state.name, format(new Date(this.state.expiration), 'MM/dd/yyyy'), this.state.expiration);
+        // console.log(this.state.name, format(new Date(this.state.expiration), 'MM/dd/yyyy'), this.state.expiration);
+        //console.log(moment(this.state.expiration, 'DD/MM/YYYY'));
+
+        var isExpired = moment(new Date(), 'DD/MM/YYYY').isBefore(this.state.expiration, 'DD/MM/YYYY');
+        console.log(isExpired);
+
+
+        //console.log(moment(new Date(), 'DD/MM/YYYY').isBefore(this.state.expiration, 'DD/MM/YYYY'));
+        // console.log(this.state.name, format(new Date(this.state.expiration), 'MM/dd/yyyy'), this.state.expiration);
+
+
         // console.log(moment(this.state.expiration, 'DD/MM/YYY'))
         // format(new Date(2014, 1, 11), 'YYYY-MM-dd')
         // if (this.state.name && this.state.expiration) {
@@ -62,7 +75,20 @@ class camera extends Component {
         //         .then(res => this.loadFoods())
         //         .catch(err => console.log(err));
         // }
+        // console.log(moment(new Date(), 'DD/MM/YYYY').isBefore(this.state.expiration, 'DD/MM/YYYY'));
+        if (this.state.name && this.state.expiration) {
+            API.saveFood({
+                foodItem: this.state.name,
+                expirationDate: this.state.expiration
+            })
+            API.updateUseFridge({
 
+            })
+                .then(res => {
+                    console.log(res)
+                })
+                .catch(err => console.log(err));
+        }
     };
 
     render() {
@@ -71,28 +97,30 @@ class camera extends Component {
                 <Container>
                     <Row>
                         <Col size="md-6">
-                            <form>
-                                <div>Input item information here:</div>
-                                <Input
-                                    type="text"
-                                    value={this.state.name}
-                                    onChange={this.handleInputChange}
-                                    name="name"
-                                    placeholder="food item (required)"
-                                />
-                                <div>Expiration Date:</div>
-                                <Input
-                                    type="date"
-                                    value={this.state.expiration}
-                                    onChange={this.handleInputChange}
-                                    name="expiration"
-                                    placeholder="expiration (required)"
-                                />
-                                <FormBtn
-                                    disabled={!(this.state.name && this.state.expiration)}
-                                    onClick={this.handleFormSubmit}
-                                >Add Food</FormBtn>
-                            </form>
+                            <div className="text-container">
+                                <form>
+                                    <div>Input item information here:</div>
+                                    <Input
+                                        type="text"
+                                        value={this.state.name}
+                                        onChange={this.handleInputChange}
+                                        name="name"
+                                        placeholder="food item (required)"
+                                    />
+                                    <div>Expiration Date:</div>
+                                    <Input
+                                        type="date"
+                                        value={this.state.expiration}
+                                        onChange={this.handleInputChange}
+                                        name="expiration"
+                                        placeholder="expiration (required)"
+                                    />
+                                    <FormBtn
+                                        disabled={!(this.state.name && this.state.expiration)}
+                                        onClick={this.handleFormSubmit}
+                                    >Add Food</FormBtn>
+                                </form>
+                            </div>
                         </Col>
                         <Col size="md-6">
                             {this.state.foods.length ? (
@@ -104,7 +132,9 @@ class camera extends Component {
                                     ))}
                                 </List>
                             ) : (
-                                    <h3>No Results to Display</h3>
+                                    <div className="results">
+                                        <h3>No Results to Display</h3>
+                                    </div>
                                 )}
                         </Col>
                     </Row>
