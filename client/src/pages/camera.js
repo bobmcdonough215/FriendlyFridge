@@ -57,13 +57,13 @@ class camera extends Component {
                         value={this.state.name}
                         onChange={this.handleInputChange}
                         name="food"
-                        placeholder="food item (required)"
+                        placeholder="username (required)"
                     />
                     <Input
                         value={this.state.expiration}
                         onChange={this.handleInputChange}
                         name="expiration"
-                        placeholder="expiration date (required)"
+                        placeholder="expiration (required)"
                     />
                     <FormBtn
                         disabled={!(this.state.name && this.state.expiration)}

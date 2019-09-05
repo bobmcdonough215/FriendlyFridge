@@ -1,4 +1,6 @@
 const mongoose = require("mongoose");
+const db = require("../models");
+
 const Fridge = require("../models/userFridge.js");
 const User = require("../models/user.js");
 
@@ -20,9 +22,9 @@ const fridgeSeed = [
 ];
 
 
-Fridge
+db.Fridge
   .remove({})
-  .then(() => Fridge.collection.insertMany(fridgeSeed))
+  .then(() => db.Fridge.collection.insertMany(fridgeSeed))
   .then(data => {
     console.log(data.result.n + " records inserted!");
     process.exit(0);
@@ -39,9 +41,9 @@ Fridge
     }
   ];
 
-  User
+  db.User
   .remove({})
-  .then(() => User.collection.insertMany(userSeed))
+  .then(() => db.User.collection.insertMany(userSeed))
   .then(data => {
     console.log(data.result.n + " records inserted!");
     process.exit(0);
