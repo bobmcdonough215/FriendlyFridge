@@ -54,12 +54,14 @@ class camera extends Component {
                     <Col size="md-6">
                 <form>
                     <Input
+                    type="text"
                         value={this.state.name}
                         onChange={this.handleInputChange}
-                        name="food"
+                        name="name"
                         placeholder="username (required)"
                     />
                     <Input
+                    type="text"
                         value={this.state.expiration}
                         onChange={this.handleInputChange}
                         name="expiration"
