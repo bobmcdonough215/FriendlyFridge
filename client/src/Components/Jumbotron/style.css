@@ -1,0 +1,9 @@
+.jumbotron{
+    background-size: cover; 
+    height: 100%;
+    width: 100%;
+    opacity: 0.2;
+    background-color: #1a2e18;
+    color: white;
+    font-family: 'Permanent Marker', cursive;
+}
