@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Input, FormBtn, } from "../Components/Form";
+import { Redirect } from 'react-router-dom'
 import axios from 'axios';
 import { Container, Row, Col } from "../Components/Grid";
 import "./signup.css";
@@ -31,7 +32,7 @@ handleFormSubmit(event) {
     console.log(this.state.username);
     event.preventDefault();
     // request connection with server below
-    axios.post('/user/', {
+    axios.post('/user/signup/', {
         username: this.state.username,
         password: this.state.password
     })
