@@ -81,9 +81,6 @@ class camera extends Component {
                 foodItem: this.state.name,
                 expirationDate: this.state.expiration
             })
-            API.updateUseFridge({
-
-            })
                 .then(res => {
                     console.log(res)
                 })

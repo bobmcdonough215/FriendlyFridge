@@ -1,23 +1,50 @@
 const express = require("express");
+const bodyParser = require('body-parser')
+const session = require('express-session')
+const dbConnection = require('./client/dbconnection') 
+const MongoStore = require('connect-mongo')(session)
+const passport = require("./client/src/utils/passport");
 const path = require("path");
 const PORT = process.env.PORT || 3001;
 const app = express();
 const mongoose = require("mongoose");
 const routes = require("./routes");
 var db = require("./models");
+const user = require('./routes/user')
+
 
 
 
 // Define middleware here
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-// Serve up static assets (usually on heroku)
-if (process.env.NODE_ENV === "production") {
-  app.use(express.static("client/build"));
-}
+
+app.use(
+	bodyParser.urlencoded({
+		extended: false
+	})
+)
+app.use(bodyParser.json())
+
+
+// Sessions
+app.use(
+	session({
+		secret: 'philly-special', //pick a random string to make the hash that is generated secure
+		store: new MongoStore({ mongooseConnection: dbConnection }),
+		resave: false, //required
+		saveUninitialized: false //required
+	})
+)
+
+// Passport
+app.use(passport.initialize())
+app.use(passport.session()) // calls the deserializeUser
+
 
 // Define API routes here
-app.use(routes);
+app.use("/api", routes);
+app.use('/user', user)
 
 // Connect to the Mongo DB
 const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/virtualFridge";
@@ -59,18 +86,18 @@ app.get("/fridges", function(req, res) {
 });
 
 // Route for retrieving all Users from the db
-app.get("/user", function(req, res) {
-  // Find all Users
-  db.User.find({})
-    .then(function(dbUser) {
-      // If all Users are successfully found, send them back to the client
-      res.json(dbUser);
-    })
-    .catch(function(err) {
-      // If an error occurs, send the error back to the client
-      res.json(err);
-    });
-});
+// app.get("/user", function(req, res) {
+//   // Find all Users
+//   db.User.find({})
+//     .then(function(dbUser) {
+//       // If all Users are successfully found, send them back to the client
+//       res.json(dbUser);
+//     })
+//     .catch(function(err) {
+//       // If an error occurs, send the error back to the client
+//       res.json(err);
+//     });
+// });
 
 // Route for saving a new Note to the db and associating it with a User
 app.post("/submit", function(req, res) {
@@ -111,9 +138,9 @@ app.get("/populatefridge", function(req, res) {
 
 // Send every other request to the React app
 // Define any API routes before this runs
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "./client/build/index.html"));
-});
+// app.get("*", (req, res) => {
+//   res.sendFile(path.join(__dirname, "./client/build/index.html"));
+// });
 
 app.listen(PORT, () => {
   console.log(`🌎 ==> API server now on port ${PORT}!`);

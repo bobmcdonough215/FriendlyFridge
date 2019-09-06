@@ -11,16 +11,15 @@ import Img from "../Components/images/jakub-kapusnak-vnNFWKY7Tj4-unsplash.jpg";
 
 class login extends Component {
     constructor() {
-        super();
-    this.state = {
-        username: '',
-        password: '',
-        redirectTo: null,
-
-    }
-    this.handleFormSubmit = this.handleFormSubmit.bind(this)
-    this.handleInputChange = this.handleInputChange.bind(this)
-
+        super()
+        this.state = {
+            username: '',
+            password: '',
+            redirectTo: null
+        }
+        this.handleFormSubmit = this.handleFormSubmit.bind(this)
+        this.handleInputChange = this.handleInputChange.bind(this)
+  
     }
 
     handleInputChange(event) {
@@ -32,7 +31,7 @@ class login extends Component {
     handleFormSubmit(event) {
         event.preventDefault();
         console.log('sign-up-form, username: ');
-        console.log(this.state.email);
+        console.log(this.state.username);
         // request connection with server below
         axios.post('/user/login/', {
             username: this.state.username,
@@ -45,16 +44,23 @@ class login extends Component {
                         loggedIn: true,
                         username: response.data.username
                     })
+                    // update the state to redirect to home
                     this.setState({
-                        redirectTo: "/myfridge/"
+                        redirectTo: '/'
                     })
                 }
             }).catch(error => {
-                console.log('sign up server error: ')
+                console.log('login error: ')
                 console.log(error);
+
             })
     }
 
+    renderRedirect = () => {
+        if (this.state.redirect) {
+            return <Redirect to="/" />
+        }
+    }
     render() {
         if (this.state.redirectTo) {
             return <Redirect to={{ pathname: this.state.redirectTo }} />

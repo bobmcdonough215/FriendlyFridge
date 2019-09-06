@@ -4,7 +4,8 @@ import axios from 'axios';
 import { Container, Row, Col } from "../Components/Grid";
 import "./signup.css";
 import Img from "../Components/images/jakub-kapusnak-vnNFWKY7Tj4-unsplash.jpg";
-import { Link } from "react-router-dom";
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+
 
 class signup extends Component {
     constructor(){
@@ -27,11 +28,11 @@ handleInputChange(event) {
 };
 
 handleFormSubmit(event) {
-    event.preventDefault();
     console.log(this.state.username);
+    event.preventDefault();
     // request connection with server below
     axios.post('/user/', {
-        email: this.state.email,
+        username: this.state.username,
         password: this.state.password
     })
         .then(response => {
