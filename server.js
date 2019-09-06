@@ -10,9 +10,11 @@ const app = express();
 const mongoose = require("mongoose");
 const routes = require("./routes");
 var db = require("./models");
-const user = require('./routes/user')
+const user = require('./routes/user');
+var logger = require("morgan");
 
 
+app.use(logger("dev"));
 
 
 // Define middleware here
@@ -74,7 +76,7 @@ app.post("/submit", function(req, res) {
 // Route for retrieving all Notes from the db
 app.get("/fridges", function(req, res) {
   // Find all Notes
-  db.Note.find({})
+  db.Fridge.find({})
     .then(function(dbFridge) {
       // If all Notes are successfully found, send them back to the client
       res.json(dbFridge);
@@ -86,32 +88,33 @@ app.get("/fridges", function(req, res) {
 });
 
 // Route for retrieving all Users from the db
-// app.get("/user", function(req, res) {
-//   // Find all Users
-//   db.User.find({})
-//     .then(function(dbUser) {
-//       // If all Users are successfully found, send them back to the client
-//       res.json(dbUser);
-//     })
-//     .catch(function(err) {
-//       // If an error occurs, send the error back to the client
-//       res.json(err);
-//     });
-// });
+app.get("/user", function(req, res) {
+  // Find all Users
+  db.User.find({})
+    .then(function(dbUser) {
+      // If all Users are successfully found, send them back to the client
+      res.json(dbUser);
+    })
+    .catch(function(err) {
+      // If an error occurs, send the error back to the client
+      res.json(err);
+    });
+});
 
 // Route for saving a new Note to the db and associating it with a User
 app.post("/submit", function(req, res) {
   // Create a new Note in the db
   db.Fridge.create(req.body)
     .then(function(dbFridge) {
+      console.log("Fridge: " + dbFridge);
       // If a Note was created successfully, find one User (there's only one) and push the new Note's _id to the User's `notes` array
       // { new: true } tells the query that we want it to return the updated User -- it returns the original by default
       // Since our mongoose query returns a promise, we can chain another `.then` which receives the result of the query
-      return db.User.findOneAndUpdate({}, { $push: { fridges: dbFridge._id } }, { new: true });
+      // return db.User.findOneAndUpdate({}, { $push: { fridges: dbFridge._id } }, { new: true });
     })
-    .then(function(dbUser) {
+    .then(function(dbFridge) {
       // If the User was updated successfully, send it back to the client
-      res.json(dbUser);
+      res.json(dbFridge);
     })
     .catch(function(err) {
       // If an error occurs, send it back to the client
@@ -138,9 +141,9 @@ app.get("/populatefridge", function(req, res) {
 
 // Send every other request to the React app
 // Define any API routes before this runs
-// app.get("*", (req, res) => {
-//   res.sendFile(path.join(__dirname, "./client/build/index.html"));
-// });
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "./client/build/index.html"));
+});
 
 app.listen(PORT, () => {
   console.log(`🌎 ==> API server now on port ${PORT}!`);
