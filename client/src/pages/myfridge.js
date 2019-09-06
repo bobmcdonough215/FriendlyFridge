@@ -14,9 +14,9 @@ class myfridge extends Component {
         expiration: " "
     }
 
-    // componentDidMount() {
-    //     this.loadFoods();
-    //   }
+    componentDidMount() {
+        this.loadFoods();
+      }
 
     loadFoods = () => {
         API.getFoods()
@@ -40,15 +40,16 @@ class myfridge extends Component {
                         <List>
                             {this.state.foods.map(food => (
                                 <ListItem key={food._id}>
+                                    {food.foodItem}
                                     <DeleteBtn onClick={() => this.deleteFood(food._id)} />
                                 </ListItem>
                             ))}
                         </List>
                     ) : (
-                            <div class="row">
-                                <div class="col-lg-12">
-                                    <div class="card">
-                                        <div class="card-header">
+                            <div className="row">
+                                <div className="col-lg-12">
+                                    <div className="card">
+                                        <div className="card-header">
                                             <h3>Your fridge is empty!</h3>
                                             <ul id="fridge-foods"></ul>
                                         </div>

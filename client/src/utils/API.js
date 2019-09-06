@@ -7,7 +7,12 @@ export default {
       console.log("API.js in /utils:")
       console.log(fridgeData)
     return axios.post("/api/api/fridge", fridgeData);
+  },
+
+  getFoods: function() {
+    return axios.get("/populatefridge");
   }
+
 
 
 };

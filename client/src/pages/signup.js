@@ -40,9 +40,16 @@ handleFormSubmit(event) {
             console.log(response)
             if (response.data) {
                 console.log('sucessful signup')
-                this.setState({
-                    redirectTo: '/myfridge'
+                // Create an empty fridge on signup
+                axios.post("/submit", {foods: []})
+                .then(response => {
+                    console.log("created empty fridge");
+                    console.log(response);
+                    this.setState({
+                        redirectTo: '/myfridge'
+                    })
                 })
+                .catch(err => console.log(err));
             } else {
                 console.log('Sign-up error');
             }
