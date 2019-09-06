@@ -1,42 +1,53 @@
 import React, { Component } from "react";
 import { Input, FormBtn, } from "../Components/Form";
+import { Redirect } from 'react-router-dom'
+import { Col, Row, Container } from "../Components/Grid";
+import { Link } from "react-router-dom";
 import axios from 'axios';
 // import { Container, Row, Col } from "../Components/Grid";
 import "./login.css";
 import Img from "../Components/images/jakub-kapusnak-vnNFWKY7Tj4-unsplash.jpg";
-import { Link } from "react-router-dom";
+
 
 class login extends Component {
-    state = {
-        email: "",
-        password: ""
+    constructor() {
+        super();
+    this.state = {
+        username: '',
+        password: '',
+        redirectTo: null,
+
+    }
+    this.handleFormSubmit = this.handleFormSubmit.bind(this)
+    this.handleInputChange = this.handleInputChange.bind(this)
+
     }
 
-    handleInputChange = event => {
-        const { name, value } = event.target;
+    handleInputChange(event) {
         this.setState({
-            [name]: value
+            [event.target.name]: event.target.value
         });
     };
 
-    handleFormSubmit = event => {
+    handleFormSubmit(event) {
         event.preventDefault();
         console.log('sign-up-form, username: ');
         console.log(this.state.email);
         // request connection with server below
-        axios.post('/', {
-            email: this.state.email,
+        axios.post('/user/login/', {
+            username: this.state.username,
             password: this.state.password
         })
             .then(response => {
                 console.log(response)
-                if (response.data) {
-                    console.log('sucessful signup')
-                    this.setState({
-                        redirectTo: '/login'
+                if (response.status === 200) {
+                    this.props.updateUser({
+                        loggedIn: true,
+                        username: response.data.username
                     })
-                } else {
-                    console.log('Sign-up error');
+                    this.setState({
+                        redirectTo: "/myfridge/"
+                    })
                 }
             }).catch(error => {
                 console.log('sign up server error: ')
@@ -45,59 +56,58 @@ class login extends Component {
     }
 
     render() {
-
-        return (
-            // <Container fluid>
-            //     <Container>
-            //         <Row>
-            //             <Col size="md-4">
-            //             </Col>
-            //             <Col size="md-4">
-            <div className="background">
-                <div className="container">
-
-                    <div className="welcome"><h2>Welcome to Friendly Fridge!</h2></div>
-                    <form>
-                        <div className="user">Email
-                                     <Input
-                                     type="email"
-                                value={this.state.login}
-                                onChange={this.handleInputChange}
-                                name="email"
-                                placeholder="email (required)"
-                            /></div>
-                        <div className="password">Password
-                                     <Input
-                                type="password"
-                                value={this.state.password}
-                                onChange={this.handleInputChange}
-                                name="password"
-                                placeholder="password(required)"
-                            /></div>
-                        <div className="buttonContainer">
-                            <FormBtn
-                                disabled={!(this.state.login && this.state.password)}
+        if (this.state.redirectTo) {
+            return <Redirect to={{ pathname: this.state.redirectTo }} />
+        } else {
+            return (
+                <Container>
+            
+                    <h4>Login</h4>
+                    <form className="form-horizontal">
+                        <div className="form-group">
+                            <div className="col-1 col-ml-auto">
+                                <label className="form-label" htmlFor="username">Username</label>
+                            </div>
+                            <div className="col-3 col-mr-auto">
+                                <input className="form-input"
+                                    type="text"
+                                    id="username"
+                                    name="username"
+                                    placeholder="Username"
+                                    value={this.state.username}
+                                    onChange={this.handleInputChange}
+                                />
+                            </div>
+                        </div>
+                        <div className="form-group">
+                            <div className="col-1 col-ml-auto">
+                                <label className="form-label" htmlFor="password">Password: </label>
+                            </div>
+                            <div className="col-3 col-mr-auto">
+                                <input className="form-input"
+                                    placeholder="password"
+                                    type="password"
+                                    name="password"
+                                    value={this.state.password}
+                                    onChange={this.handleInputChange}
+                                />
+                            </div>
+                        </div>
+                        <div className="form-group ">
+                            <div className="col-7"></div>
+                            <button
+                                className="btn btn-primary"
+                               
                                 onClick={this.handleFormSubmit}
-                            >Login</FormBtn>
-                            {/* <div className="sign-up"> */}
-                            <Link to="/signup">
-                            <FormBtn>
-                                Sign Up
-                            </FormBtn>
-                            </Link>
-                            {/* </div> */}
+                                type="submit">Login</button>
                         </div>
                     </form>
-                </div>
-            </div>
-            //             </Col>
-            //             <Col size="md-4">
-            //             </Col>
-            //         </Row>
-            //     </Container>
-            // </Container>
-        )
+                 <p className="signUp">Don't have an account? <Link to="/signup">Create an account</Link></p>
+                 </Container>
+            )
+        }
     }
-};
+}
+
 
 export default login;

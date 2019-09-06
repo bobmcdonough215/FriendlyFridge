@@ -1,115 +1,96 @@
 import React, { Component } from "react";
 import { Input, FormBtn, } from "../Components/Form";
 import axios from 'axios';
-// import { Container, Row, Col } from "../Components/Grid";
+import { Container, Row, Col } from "../Components/Grid";
 import "./signup.css";
 import Img from "../Components/images/jakub-kapusnak-vnNFWKY7Tj4-unsplash.jpg";
 import { Link } from "react-router-dom";
 
 class signup extends Component {
-    state = {
-        email: "",
+    constructor(){
+        super()
+    this.state = {
+        username: "",
         password: "",
-        firstName: "",
-        lastName: ""
+        confirmPassword: "",
+    }
+    this.handleFormSubmit = this.handleFormSubmit.bind(this)
+this.handleInputChange = this.handleInputChange.bind(this)
+
     }
 
-    handleInputChange = event => {
-        const { name, value } = event.target;
-        this.setState({
-            [name]: value
-        });
-    };
+handleInputChange(event) {
+    this.setState({
+        [event.target.name]: event.target.value
 
-    handleFormSubmit = event => {
-        event.preventDefault();
-        console.log('sign-up-form, username: ');
-        console.log(this.state.email);
-        // request connection with server below
-        axios.post('/', {
-            email: this.state.email,
-            password: this.state.password
-        })
-            .then(response => {
-                console.log(response)
-                if (response.data) {
-                    console.log('sucessful signup')
-                    this.setState({
-                        redirectTo: '/login'
-                    })
-                } else {
-                    console.log('Sign-up error');
-                }
-            }).catch(error => {
-                console.log('sign up server error: ')
-                console.log(error);
-            })
-    }
-
-    render() {
-
-        return (
-            // <Container fluid>
-            //     <Container>
-            //         <Row>
-            //             <Col size="md-4">
-            //             </Col>
-            //             <Col size="md-4">
-            <div className="background">
-                <div className="container">
-
-                    <div className="welcome"><h2>Welcome to Friendly Fridge!</h2></div>
-                    <form>
-                    <div className="user">First name
-                                     <Input
-                                value={this.state.firstName}
-                                onChange={this.handleInputChange}
-                                name="firstName"
-                                placeholder="First Name (required)"
-                            /></div>
-                            <div className="user">Last name
-                                     <Input
-                                value={this.state.lastName}
-                                onChange={this.handleInputChange}
-                                name="lastName"
-                                placeholder="Last Name (required)"
-                            /></div>
-                            <div className="user">Email
-                                     <Input
-                                     type="email"
-                                value={this.state.login}
-                                onChange={this.handleInputChange}
-                                name="email"
-                                placeholder="Email (required)"
-                            /></div>
-                        <div className="password">Password
-                                     <Input
-                                type="password"
-                                value={this.state.password}
-                                onChange={this.handleInputChange}
-                                name="password"
-                                placeholder="password(required)"
-                            /></div>
-                        <div className="buttonContainer">
-                        <Link to="/">
-                            <FormBtn
-                                disabled={!(this.state.firstName && this.state.lastName)}
-                                onClick={this.handleFormSubmit}
-                            >Sign Up</FormBtn>
-                            </Link>
-                            {/* </div> */}
-                        </div>
-                    </form>
-                </div>
-            </div>
-            //             </Col>
-            //             <Col size="md-4">
-            //             </Col>
-            //         </Row>
-            //     </Container>
-            // </Container>
-        )
-    }
+    });
 };
 
+handleFormSubmit(event) {
+    event.preventDefault();
+    console.log(this.state.username);
+    // request connection with server below
+    axios.post('/user/', {
+        email: this.state.email,
+        password: this.state.password
+    })
+        .then(response => {
+            console.log(response)
+            if (response.data) {
+                console.log('sucessful signup')
+                this.setState({
+                    redirectTo: '/myfridge'
+                })
+            } else {
+                console.log('Sign-up error');
+            }
+        }).catch(error => {
+            console.log('sign up server error: ')
+            console.log(error);
+        })
+}
+
+render() {
+    return (
+        <Container>
+            <Row>
+                <h2>Welcome to Friendly Fridge!</h2>
+
+            </Row>
+            <div class="container center_div">
+                <div className="SignupForm">
+                    <form className="form-horizontal">
+                        <div className="form-group">
+
+                            <label className="form-label" htmlFor="username">Username</label>
+                            <input className="form-input"
+                                type="text"
+                                value={this.state.username}
+                                onChange={this.handleInputChange}
+                                name="username"
+                                placeholder="Username"
+                            /></div>
+                        <div className="form-group">
+                            <label className="form-label" htmlFor="password">Password</label>
+                            <input className="form-input"
+                            type="password"
+                                value={this.state.password}
+                            onChange={this.handleInputChange}
+                            name="password"
+                            placeholder="password(required)"
+                            /></div>
+                            <button
+                            className="btn btn-primary signUpButton"
+                                onClick={this.handleFormSubmit}
+                                type="submit"
+                            >Sign Up</button>
+                                </form>
+                            </div>
+                </div>
+                <p className="registerText">Already have an account? <Link to="/">Sign in</Link></p>
+</Container>
+                )
+            }
+        }
+        
 export default signup;
