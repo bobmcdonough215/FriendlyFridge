@@ -56,7 +56,7 @@ render() {
     return (
         <Container>
             <Row>
-                <h2>Welcome to Friendly Fridge!</h2>
+                <h2 className="textstyle">Welcome to Friendly Fridge!</h2>
 
             </Row>
             <div class="container center_div">
@@ -64,7 +64,7 @@ render() {
                     <form className="form-horizontal">
                         <div className="form-group">
 
-                            <label className="form-label" htmlFor="username">Username</label>
+                            <label className="form-label" className="textstyle" htmlFor="username">Username</label>
                             <input className="form-input"
                                 type="text"
                                 value={this.state.username}
@@ -73,7 +73,7 @@ render() {
                                 placeholder="Username"
                             /></div>
                         <div className="form-group">
-                            <label className="form-label" htmlFor="password">Password</label>
+                            <label className="form-label" className="textstyle" htmlFor="password">Password</label>
                             <input className="form-input"
                             type="password"
                                 value={this.state.password}
@@ -89,7 +89,7 @@ render() {
                                 </form>
                             </div>
                 </div>
-                <p className="registerText">Already have an account? <Link to="/">Sign in</Link></p>
+                <p className="registerText" className="textstyle">Already have an account? <Link to="/">Sign in</Link></p>
 </Container>
                 )
             }
