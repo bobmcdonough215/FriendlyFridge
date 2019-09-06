@@ -76,19 +76,7 @@ class camera extends Component {
 
 
         // console.log(moment(new Date(), 'DD/MM/YYYY').isBefore(this.state.expiration, 'DD/MM/YYYY'));
-        if (this.state.name && this.state.expiration) {
-            API.saveFood({
-                foodItem: this.state.name,
-                expirationDate: this.state.expiration
-            })
-            API.updateUseFridge({
-
-            })
-                .then(res => {
-                    console.log(res)
-                })
-                .catch(err => console.log(err));
-        }
+        
 
     };
 

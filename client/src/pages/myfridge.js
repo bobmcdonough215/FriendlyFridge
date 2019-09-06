@@ -1,8 +1,7 @@
 import React, { Component } from "react";
 import { Container, Row, Col } from "../Components/Grid";
 import { List, ListItem } from "../Components/List";
-import { Link } from "react-router-dom";
-import DeleteBtn from "../Components/DeleteBtn";
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";import DeleteBtn from "../Components/DeleteBtn";
 import API from "../utils/API";
 import AddFoodBtn from "../Components/AddFoodBtn";
 import "./myfridge.css";

@@ -1,15 +1,8 @@
-import React, { Component } from "react";
-import { Input, FormBtn, } from "../Components/Form";
+import React, { Component } from 'react'
 import { Redirect } from 'react-router-dom'
-import { Col, Row, Container } from "../Components/Grid";
-import { Link } from "react-router-dom";
-import axios from 'axios';
-// import { Container, Row, Col } from "../Components/Grid";
-import "./login.css";
-import Img from "../Components/images/jakub-kapusnak-vnNFWKY7Tj4-unsplash.jpg";
+import axios from 'axios'
 
-
-class login extends Component {
+class LoginForm extends Component {
     constructor() {
         super()
         this.state = {
@@ -17,29 +10,31 @@ class login extends Component {
             password: '',
             redirectTo: null
         }
-        this.handleFormSubmit = this.handleFormSubmit.bind(this)
-        this.handleInputChange = this.handleInputChange.bind(this)
+        this.handleSubmit = this.handleSubmit.bind(this)
+        this.handleChange = this.handleChange.bind(this)
   
     }
 
-    handleInputChange(event) {
+    handleChange(event) {
         this.setState({
             [event.target.name]: event.target.value
-        });
-    };
-
-    handleFormSubmit(event) {
-        event.preventDefault();
-        console.log('sign-up-form, username: ');
-        console.log(this.state.username);
-        // request connection with server below
-        axios.post('/user/login/', {
-            username: this.state.username,
-            password: this.state.password
         })
+    }
+
+    handleSubmit(event) {
+        event.preventDefault()
+        console.log('handleSubmit')
+
+        axios
+            .post('/user/login', {
+                username: this.state.username,
+                password: this.state.password
+            })
             .then(response => {
+                console.log('login response: ')
                 console.log(response)
                 if (response.status === 200) {
+                    // update App.js state
                     this.props.updateUser({
                         loggedIn: true,
                         username: response.data.username
@@ -52,22 +47,16 @@ class login extends Component {
             }).catch(error => {
                 console.log('login error: ')
                 console.log(error);
-
+                
             })
     }
 
-    renderRedirect = () => {
-        if (this.state.redirect) {
-            return <Redirect to="/" />
-        }
-    }
     render() {
         if (this.state.redirectTo) {
             return <Redirect to={{ pathname: this.state.redirectTo }} />
         } else {
             return (
-                <Container>
-            
+                <div>
                     <h4>Login</h4>
                     <form className="form-horizontal">
                         <div className="form-group">
@@ -81,7 +70,7 @@ class login extends Component {
                                     name="username"
                                     placeholder="Username"
                                     value={this.state.username}
-                                    onChange={this.handleInputChange}
+                                    onChange={this.handleChange}
                                 />
                             </div>
                         </div>
@@ -95,25 +84,23 @@ class login extends Component {
                                     type="password"
                                     name="password"
                                     value={this.state.password}
-                                    onChange={this.handleInputChange}
+                                    onChange={this.handleChange}
                                 />
                             </div>
                         </div>
                         <div className="form-group ">
                             <div className="col-7"></div>
                             <button
-                                className="btn btn-primary"
+                                className="btn btn-primary col-1 col-mr-auto"
                                
-                                onClick={this.handleFormSubmit}
+                                onClick={this.handleSubmit}
                                 type="submit">Login</button>
                         </div>
                     </form>
-                 <p className="signUp">Don't have an account? <Link to="/signup">Create an account</Link></p>
-                 </Container>
+                </div>
             )
         }
     }
 }
 
-
-export default login;
+export default LoginForm

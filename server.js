@@ -1,23 +1,52 @@
 const express = require("express");
+const bodyParser = require('body-parser')
+const session = require('express-session')
+const dbConnection = require('./client/dbconnection') 
+const MongoStore = require('connect-mongo')(session)
+const passport = require("./client/src/utils/passport");
 const path = require("path");
 const PORT = process.env.PORT || 3001;
 const app = express();
 const mongoose = require("mongoose");
 const routes = require("./routes");
 var db = require("./models");
+const user = require('./routes/user');
+var logger = require("morgan");
 
+
+app.use(logger("dev"));
 
 
 // Define middleware here
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-// Serve up static assets (usually on heroku)
-if (process.env.NODE_ENV === "production") {
-  app.use(express.static("client/build"));
-}
+
+app.use(
+	bodyParser.urlencoded({
+		extended: false
+	})
+)
+app.use(bodyParser.json())
+
+
+// Sessions
+app.use(
+	session({
+		secret: 'philly-special', //pick a random string to make the hash that is generated secure
+		store: new MongoStore({ mongooseConnection: dbConnection }),
+		resave: false, //required
+		saveUninitialized: false //required
+	})
+)
+
+// Passport
+app.use(passport.initialize())
+app.use(passport.session()) // calls the deserializeUser
+
 
 // Define API routes here
-app.use(routes);
+app.use("/api", routes);
+app.use('/user', user)
 
 // Connect to the Mongo DB
 const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/virtualFridge";
@@ -47,7 +76,7 @@ app.post("/submit", function(req, res) {
 // Route for retrieving all Notes from the db
 app.get("/fridges", function(req, res) {
   // Find all Notes
-  db.Note.find({})
+  db.Fridge.find({})
     .then(function(dbFridge) {
       // If all Notes are successfully found, send them back to the client
       res.json(dbFridge);
@@ -77,14 +106,15 @@ app.post("/submit", function(req, res) {
   // Create a new Note in the db
   db.Fridge.create(req.body)
     .then(function(dbFridge) {
+      console.log("Fridge: " + dbFridge);
       // If a Note was created successfully, find one User (there's only one) and push the new Note's _id to the User's `notes` array
       // { new: true } tells the query that we want it to return the updated User -- it returns the original by default
       // Since our mongoose query returns a promise, we can chain another `.then` which receives the result of the query
-      return db.User.findOneAndUpdate({}, { $push: { fridges: dbFridge._id } }, { new: true });
+      // return db.User.findOneAndUpdate({}, { $push: { fridges: dbFridge._id } }, { new: true });
     })
-    .then(function(dbUser) {
+    .then(function(dbFridge) {
       // If the User was updated successfully, send it back to the client
-      res.json(dbUser);
+      res.json(dbFridge);
     })
     .catch(function(err) {
       // If an error occurs, send it back to the client
