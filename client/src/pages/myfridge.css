@@ -3,3 +3,29 @@
     text-align: center;
     margin: 5%;
 }
+
+.title-style {
+    color: white;
+    text-align: center;
+    margin: 10%;
+}
+
+
+
+.outer-fridge {
+    width: 50%;
+    height: auto;
+    display: inline-block;
+    text-align: center;
+    margin: 5%;
+    padding: 2%;
+    position: absolute; left: 20%;
+}
+
+.button {
+    color: white;
+    background-color: green;
+    margin: 2%;
+    width: 25%;
+    display: inline-block;
+}
