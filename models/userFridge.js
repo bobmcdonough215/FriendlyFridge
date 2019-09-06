@@ -1,11 +1,11 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const fridgeSchema = new Schema({
-item: elementSchema
-});
+// const fridgeSchema = new Schema({
+// item: elementSchema
+// });
 
-const elementSchema = new Schema({
+const fridgeSchema = new Schema({
   foodItem: { type: String, required: true },
   // note: { type: String, required: true },
   expirationDate: Date

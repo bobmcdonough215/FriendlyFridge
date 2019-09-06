@@ -14,9 +14,9 @@ class myfridge extends Component {
         expiration: " "
     }
 
-    componentDidMount() {
-        this.loadBooks();
-      }
+    // componentDidMount() {
+    //     this.loadFoods();
+    //   }
 
     loadFoods = () => {
         API.getFoods()
