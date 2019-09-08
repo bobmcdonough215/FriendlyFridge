@@ -4,7 +4,7 @@ export function Input(props) {
   return (
     <div className="form-group">
       
-      <input className="form-control" {...props} />
+      <input className="form-control" form action="/submit" method="post" {...props} />
     </div>
   );
 }

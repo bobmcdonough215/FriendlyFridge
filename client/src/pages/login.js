@@ -46,7 +46,7 @@ class login extends Component {
                     })
                     // update the state to redirect to home
                     this.setState({
-                        redirectTo: '/'
+                        redirectTo: '/camera'
                     })
                 }
             }).catch(error => {
@@ -58,7 +58,7 @@ class login extends Component {
 
     renderRedirect = () => {
         if (this.state.redirect) {
-            return <Redirect to="/" />
+            return <Redirect to="/camera" />
         }
     }
     render() {
