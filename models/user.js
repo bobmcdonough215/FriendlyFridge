@@ -7,15 +7,7 @@ mongoose.promise = Promise
 const userSchema = new Schema({
 
 	username: { type: String, unique: false, required: false },
-	password: { type: String, unique: false, required: false },
-	fridges: [
-		{
-		  // Store ObjectIds in the array
-		  type: Schema.Types.ObjectId,
-		  // The ObjectIds will refer to the ids in the Note model
-		  ref: "Fridge"
-		}
-	  ]
+	password: { type: String, unique: false, required: false }
 
 })
 

@@ -32,31 +32,36 @@ handleFormSubmit(event) {
     console.log(this.state.username);
     event.preventDefault();
     // request connection with server below
-    axios.post('/user/signup/', {
-        username: this.state.username,
-        password: this.state.password
-    })
-        .then(response => {
-            console.log(response)
-            if (response.data) {
-                console.log('sucessful signup')
-                // Create an empty fridge on signup
-                axios.post("/submit", {foods: []})
-                .then(response => {
-                    console.log("created empty fridge");
-                    console.log(response);
-                    this.setState({
-                        redirectTo: '/myfridge'
-                    })
-                })
-                .catch(err => console.log(err));
-            } else {
-                console.log('Sign-up error');
-            }
-        }).catch(error => {
-            console.log('sign up server error: ')
-            console.log(error);
+    // Create an empty fridge on signup
+    axios.post("/user/signup/", {foods: []})
+    .then(response => {
+        console.log("created empty fridge");
+        console.log(response);
+        axios.post('/user/signup/', {
+            username: this.state.username,
+            password: this.state.password,
+            fridges: response.data._id
         })
+            .then(response => {
+                console.log(response)
+                if (response.data) {
+                    console.log('sucessful signup')
+                    console.log(response.data)
+
+                    this.setState({
+                        redirectTo: '/camera'
+                    })
+                    
+                } else {
+                    console.log('Sign-up error');
+                }
+            }).catch(error => {
+                console.log('sign up server error: ')
+                console.log(error);
+            })
+    })
+    .catch(err => console.log(err));
+    
 }
 
 render() {
@@ -71,7 +76,7 @@ render() {
                     <form className="form-horizontal">
                         <div className="form-group">
 
-                            <label className="form-label" className="textstyle" htmlFor="username">Username</label>
+                            <label className="form-label" className="textstyle" form action="/submit" method="post" htmlFor="username">Username</label>
                             <input className="form-input"
                                 type="text"
                                 value={this.state.username}
@@ -80,7 +85,7 @@ render() {
                                 placeholder="Username"
                             /></div>
                         <div className="form-group">
-                            <label className="form-label" className="textstyle" htmlFor="password">Password</label>
+                            <label className="form-label" className="textstyle" form action="/submit" method="post" htmlFor="password">Password</label>
                             <input className="form-input"
                             type="password"
                                 value={this.state.password}
