@@ -146,7 +146,16 @@ app.get("/populatefridge", function(req, res) {
     });
 });
 
+// app.post("/api/fridges", function(req, res) {
+ 
+//   console.log("Food route: create:")
+//   console.log(req.body);
+//   db.Fridge
+//     .create(req.body)
+//     .then(dbModel => res.json(dbModel))
+//     .catch(err => res.status(422).json(err));
 
+// })
 // Send every other request to the React app
 // Define any API routes before this runs
 app.get("*", (req, res) => {

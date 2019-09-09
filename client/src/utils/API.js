@@ -13,7 +13,7 @@ export default {
     return axios.get("/populatefridge");
   }
 
-
+  // return axios.post("/fridges/", fridgeData);
 
 };
 
