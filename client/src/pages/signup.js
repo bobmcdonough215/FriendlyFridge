@@ -49,7 +49,7 @@ handleFormSubmit(event) {
                     console.log(response.data)
 
                     this.setState({
-                        redirectTo: '/camera'
+                        redirectTo: '/additem'
                     })
                     
                 } else {
