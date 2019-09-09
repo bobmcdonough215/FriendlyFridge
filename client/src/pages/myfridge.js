@@ -7,7 +7,6 @@ import AddFoodBtn from "../Components/AddFoodBtn";
 import "./myfridge.css";
 import moment from "moment";
 import axios from "axios";
-import camera from "./camera.js";
 
 
 class myfridge extends Component {
