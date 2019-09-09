@@ -18,6 +18,7 @@ class myfridge extends Component {
 
     componentDidMount() {
         this.loadFoods();
+        this.checkExpiration();
       }
 
     loadFoods = () => {
@@ -37,6 +38,32 @@ class myfridge extends Component {
             .catch(err => console.log(err));
     };
 
+    checkExpiration = (expirationDate) => {
+        console.log("MOMENT JS");
+        var isExpired = moment(new Date(), 'DD/MM/YYYY').isBefore(expirationDate, 'DD/MM/YYYY');
+        var expiredClass = "";
+        console.log(isExpired);
+
+        if(!isExpired) {
+            if(moment(new Date(), 'DD/MM/YYYY').subtract(2, 'days')) {
+                expiredClass = "warning";
+            }
+        } else {
+            expiredClass = "expired";
+        }
+        return expiredClass;
+        // var twoDaysBefore = moment().subtract(2, 'days');
+        // console.log(twoDaysBefore);
+        // if ()
+
+
+        // console.log(moment(new Date(), 'DD/MM/YYYY').isBefore(this.state.expiration, 'DD/MM/YYYY'));
+        // console.log(this.state.name, format(new Date(this.state.expiration), 'MM/dd/yyyy'), this.state.expiration);
+        // console.log(moment(new Date(), 'DD/MM/YYYY').isBefore(this.state.expiration, 'DD/MM/YYYY'));
+
+
+    }
+
     render() {
         return (
             <div className="outer-fridge">
@@ -45,7 +72,8 @@ class myfridge extends Component {
                         <List>
                             {this.state.foods.map(food => (
                                 <ListItem key={food._id}>
-                                    {food.foodItem}
+                                    <span className={this.checkExpiration(food.expirationDate, "MM/DD/YYYY")}>
+                                    {food.foodItem}</span>
                                     <DeleteBtn onClick={() => this.deleteFood(food._id)} />
                                 </ListItem>
                             ))}
@@ -61,7 +89,6 @@ class myfridge extends Component {
                                     </div>
                                 </div>
                             </div>
-                        </div>
                     )}
                 <Link to="/camera" >
                     <div className="button">
@@ -73,15 +100,6 @@ class myfridge extends Component {
     }
 }
 
-var isExpired = moment(new Date(), 'DD/MM/YYYY').isBefore(this.state.expiration, 'DD/MM/YYYY');
-console.log(isExpired);
-
-if ()
-
-
-// console.log(moment(new Date(), 'DD/MM/YYYY').isBefore(this.state.expiration, 'DD/MM/YYYY'));
-// console.log(this.state.name, format(new Date(this.state.expiration), 'MM/dd/yyyy'), this.state.expiration);
-// console.log(moment(new Date(), 'DD/MM/YYYY').isBefore(this.state.expiration, 'DD/MM/YYYY'));
 
 
 export default myfridge;
