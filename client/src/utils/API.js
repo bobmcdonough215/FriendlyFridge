@@ -6,7 +6,7 @@ export default {
   saveFood: function(fridgeData) {
       console.log("API.js in /utils:")
       console.log(fridgeData)
-    return axios.post("/api/api/fridge", fridgeData);
+    return axios.post("/fridges/", fridgeData);
   }
 
 
