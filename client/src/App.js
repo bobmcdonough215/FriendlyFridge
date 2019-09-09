@@ -4,7 +4,7 @@ import Login from "./pages/login";
 import Nav from "./Components/Nav";
 import MyFridge from "./pages/myfridge";
 import Footer from "./Components/Footer";
-import camera from "./pages/camera";
+import additem from "./pages/additem";
 import signup from "./pages/signup";
 import "./App.css";
 import { BrowserRouter as Router, Route, Switch, Redirect } from "react-router-dom";
@@ -79,7 +79,7 @@ class App extends Component {
           }
         />
         <Route path="/myfridge" component={MyFridge} />
-          <Route exact path="/camera" component={camera} />
+          <Route exact path="/additem" component={additem} />
           <Route exact path="/signup" component={signup} />
         </Switch>
       </div>

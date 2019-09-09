@@ -10,7 +10,6 @@
     margin: 10%;
 }
 
-
 .outer-fridge {
     width: 50%;
     height: auto;
@@ -39,4 +38,7 @@
 
 .warning {
     border: 2px solid orange;
+}
+.fresh{
+    border: 2px solid green;
 }
