@@ -6,10 +6,10 @@ import DeleteBTN from "../Components/DeleteBtn";
 import { List, ListItem } from "../Components/List";
 import moment from "moment";
 import { format } from 'date-fns';
-import "./camera.css";
+import "./additem.css";
 import axios from "axios";
 
-class camera extends Component {
+class additem extends Component {
 
     state = {
         foods: [],
@@ -27,8 +27,11 @@ class camera extends Component {
 
     loadFoods = () => {
         API.getFoods()
-            .then(res =>
-                this.setState({ foods: res.data, name: "", expiration: "" })
+            .then(res => {
+                console.log(res.data)
+                this.setState({ foods: res.data, name: "", expiration: "", apiResults: res.data.foodurl})
+
+            }
             )
             .catch(err => console.log(err));
     };
@@ -141,4 +144,4 @@ class camera extends Component {
     }
 }
 
-export default camera;
+export default additem;

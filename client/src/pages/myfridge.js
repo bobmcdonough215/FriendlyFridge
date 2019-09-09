@@ -7,7 +7,6 @@ import AddFoodBtn from "../Components/AddFoodBtn";
 import "./myfridge.css";
 import moment from "moment";
 import axios from "axios";
-import camera from "./camera.js";
 
 
 class myfridge extends Component {
@@ -85,8 +84,9 @@ class myfridge extends Component {
                     <List>
                         {this.state.foods.map(food => (
                             <ListItem key={food._id}>
-                                <span className={this.checkExpiration(food.expirationDate, "MM/DD/YYYY")}>
-                                    {food.foodItem}</span>
+                                <img className={this.checkExpiration(food.expirationDate, "MM/DD/YYYY")} src={food.foodurl} alt={food.foodItem}></img>
+                                {/* <span className={this.checkExpiration(food.expirationDate, "MM/DD/YYYY")}>
+                                    </span> */}
                                 <button onClick={() => this.deleteFood(food._id)}>X</button>
                                 {/* <DeleteBtn onClick={this.deleteFood(food._id)} /> */}
 
@@ -105,7 +105,7 @@ class myfridge extends Component {
                             </div>
                         </div>
                     )}
-                <Link to="/camera" >
+                <Link to="/additem" >
                     <div className="button">
                         <AddFoodBtn />
                     </div>
