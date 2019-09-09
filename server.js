@@ -134,12 +134,11 @@ app.post("/submit", function(req, res) {
 // Route to get all User's and populate them with their notes
 app.get("/populatefridge", function(req, res) {
   // Find all users
-  db.User.find({})
-    // Specify that we want to populate the retrieved users with any associated notes
-    .populate("fridges")
-    .then(function(dbUser) {
+  db.Fridge.find({})
+    .then(function(dbFoods) {
+      console.log(dbFoods);
       // If able to successfully find and associate all Users and Notes, send them back to the client
-      res.json(dbUser);
+      res.json(dbFoods);
     })
     .catch(function(err) {
       // If an error occurs, send it back to the client
