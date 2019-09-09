@@ -43,7 +43,7 @@ db.Fridge
 
   db.User
   .remove({})
-  .then(() => db.User.collection.insertMany(userSeed))
+  .then(() => db.User.collection.setMany(userSeed))
   .then(data => {
     console.log(data.result.n + " records inserted!");
     process.exit(0);

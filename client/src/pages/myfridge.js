@@ -21,8 +21,11 @@ class myfridge extends Component {
 
     loadFoods = () => {
         API.getFoods()
-            .then(res =>
+            .then(res => {
+                console.log("Get foods");
+                console.log(res);
                 this.setState({ foods: res.data, name: "", expiration: "" })
+            }
             )
             .catch(err => console.log(err));
     };
