@@ -66,12 +66,12 @@ class myfridge extends Component {
         } else if (moment(today, 'MM/DD/YYYY').diff(expiredDate, "days") >= 0) {
             console.log("expired")
             expiredClass = "expired";
-            
+
         } else {
             expiredClass = "fresh";
         }
-        
-        return expiredClass; 
+
+        return expiredClass;
     }
 
     render() {
@@ -121,7 +121,9 @@ class myfridge extends Component {
                             <ListItem key={food._id}>
                                 <span className={this.checkExpiration(food.expirationDate, "MM/DD/YYYY")}>
                                     {food.foodItem}</span>
-                                <DeleteBtn onClick={() => this.deleteFood(food._id)} />
+                                <button onClick={() => this.deleteFood(food._id)}>X</button>
+                                {/* <DeleteBtn onClick={this.deleteFood(food._id)} /> */}
+
                             </ListItem>
                         ))}
                     </List>
@@ -147,6 +149,6 @@ class myfridge extends Component {
     }
 }
 
-
+//here deletething
 
 export default myfridge;

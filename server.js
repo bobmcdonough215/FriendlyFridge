@@ -1,7 +1,7 @@
 const express = require("express");
 const bodyParser = require('body-parser')
 const session = require('express-session')
-const dbConnection = require('./client/dbconnection') 
+const dbConnection = require('./client/dbconnection')
 const MongoStore = require('connect-mongo')(session)
 const passport = require("./client/src/utils/passport");
 const path = require("path");
@@ -22,21 +22,21 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 app.use(
-	bodyParser.urlencoded({
-		extended: false
-	})
+  bodyParser.urlencoded({
+    extended: false
+  })
 )
 app.use(bodyParser.json())
 
 
 // Sessions
 app.use(
-	session({
-		secret: 'philly-special', //pick a random string to make the hash that is generated secure
-		store: new MongoStore({ mongooseConnection: dbConnection }),
-		resave: false, //required
-		saveUninitialized: false //required
-	})
+  session({
+    secret: 'philly-special', //pick a random string to make the hash that is generated secure
+    store: new MongoStore({ mongooseConnection: dbConnection }),
+    resave: false, //required
+    saveUninitialized: false //required
+  })
 )
 
 // Passport
@@ -52,9 +52,9 @@ app.use('/user', user)
 const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/virtualFridge";
 mongoose.connect(MONGODB_URI, { useNewUrlParser: true });
 
-mongoose.connection.once("open", function(){
+mongoose.connection.once("open", function () {
   console.log("Connection has been made to the database");
-}).on("error", function(error){
+}).on("error", function (error) {
   console.log("Connection error:", error);
 })
 
@@ -74,28 +74,28 @@ mongoose.connection.once("open", function(){
 // Routes
 
 // Route for retrieving all Notes from the db
-app.get("/fridges", function(req, res) {
+app.get("/fridges", function (req, res) {
   // Find all Notes
   db.Fridge.find({})
-    .then(function(dbFridge) {
+    .then(function (dbFridge) {
       // If all Notes are successfully found, send them back to the client
       res.json(dbFridge);
     })
-    .catch(function(err) {
+    .catch(function (err) {
       // If an error occurs, send the error back to the client
       res.json(err);
     });
 });
 
 // Route for retrieving all Users from the db
-app.get("/user", function(req, res) {
+app.get("/user", function (req, res) {
   // Find all Users
   db.User.find({})
-    .then(function(dbUser) {
+    .then(function (dbUser) {
       // If all Users are successfully found, send them back to the client
       res.json(dbUser);
     })
-    .catch(function(err) {
+    .catch(function (err) {
       // If an error occurs, send the error back to the client
       res.json(err);
     });
@@ -109,45 +109,58 @@ app.get("/user", function(req, res) {
 // });
 
 // Route for saving a new Note to the db and associating it with a User
-app.post("/submit", function(req, res) {
+app.post("/submit", function (req, res) {
   // Create a new Note in the db
   db.Fridge.create(req.body)
-    .then(function(dbFridge) {
+    .then(function (dbFridge) {
       console.log("Fridge: " + dbFridge);
       // If a Note was created successfully, find one User (there's only one) and push the new Note's _id to the User's `notes` array
       // { new: true } tells the query that we want it to return the updated User -- it returns the original by default
       // Since our mongoose query returns a promise, we can chain another `.then` which receives the result of the query
       // return
-       db.User.findOneAndUpdate({}, { $push: { fridges: dbFridge._id } }, { new: true });
-      
+      db.User.findOneAndUpdate({}, { $push: { fridges: dbFridge._id } }, { new: true });
+
     })
-    .then(function(dbFridge) {
+    .then(function (dbFridge) {
       // If the User was updated successfully, send it back to the client
       res.json(dbFridge);
     })
-    .catch(function(err) {
+    .catch(function (err) {
       // If an error occurs, send it back to the client
       res.json(err);
     });
 });
 
+
+// app.post("/submit", function (req, res) {
+//   // Create a new Note in the db
+
+//   db.Fridge
+//     .findById({ _id: req.params.id })
+//     .then(dbModel => dbModel.remove())
+//     .then(dbModel => res.json(dbModel))
+//     .catch(err => res.status(422).json(err));
+
+// });
+
+
 // Route to get all User's and populate them with their notes
-app.get("/populatefridge", function(req, res) {
+app.get("/populatefridge", function (req, res) {
   // Find all users
   db.Fridge.find({})
-    .then(function(dbFoods) {
+    .then(function (dbFoods) {
       console.log(dbFoods);
       // If able to successfully find and associate all Users and Notes, send them back to the client
       res.json(dbFoods);
     })
-    .catch(function(err) {
+    .catch(function (err) {
       // If an error occurs, send it back to the client
       res.json(err);
     });
 });
 
 // app.post("/api/fridges", function(req, res) {
- 
+
 //   console.log("Food route: create:")
 //   console.log(req.body);
 //   db.Fridge
