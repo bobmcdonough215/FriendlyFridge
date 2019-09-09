@@ -27,3 +27,18 @@
     width: 25%;
     display: inline-block;
 }
+
+.foodImage{
+    border-radius: 100px;
+}
+
+.expired {
+    border: 2px solid red;
+}
+
+.warning {
+    border: 2px solid orange;
+}
+.fresh{
+    border: 2px solid green;
+}
