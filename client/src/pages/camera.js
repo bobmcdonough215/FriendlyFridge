@@ -24,13 +24,13 @@ class camera extends Component {
         });
     };
 
-    // loadFoods = () => {
-    //     API.getFoods()
-    //         .then(res =>
-    //             this.setState({ foods: res.data, name: "", expiration: "" })
-    //         )
-    //         .catch(err => console.log(err));
-    // };
+    loadFoods = () => {
+        API.getFoods()
+            .then(res =>
+                this.setState({ foods: res.data, name: "", expiration: "" })
+            )
+            .catch(err => console.log(err));
+    };
 
     // deleteFood = id => {
     //     API.deleteFood(id)

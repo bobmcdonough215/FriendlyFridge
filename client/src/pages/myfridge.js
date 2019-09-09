@@ -16,9 +16,9 @@ class myfridge extends Component {
         expiration: " "
     }
 
-    // componentDidMount() {
-    //     this.loadFoods();
-    //   }
+    componentDidMount() {
+        this.loadFoods();
+      }
 
     loadFoods = () => {
         API.getFoods()
@@ -38,6 +38,7 @@ class myfridge extends Component {
         return (
             <div className="outer-fridge">
                 <h3 className="title-style">Your Fridge</h3>
+<<<<<<< HEAD
                 {this.state.foods.length ? (
                     <List className="foodImage">
                         {this.state.foods.map(food => (
@@ -53,6 +54,25 @@ class myfridge extends Component {
                                     <div class="card-header">
                                         <h3>Your fridge is empty!</h3>
                                         <ul id="fridge-foods"></ul>
+=======
+                    {this.state.foods.length ? (
+                        <List>
+                            {this.state.foods.map(food => (
+                                <ListItem key={food._id}>
+                                    {food.foodItem}
+                                    <DeleteBtn onClick={() => this.deleteFood(food._id)} />
+                                </ListItem>
+                            ))}
+                        </List>
+                    ) : (
+                            <div className="row">
+                                <div className="col-lg-12">
+                                    <div className="card">
+                                        <div className="card-header">
+                                            <h3>Your fridge is empty!</h3>
+                                            <ul id="fridge-foods"></ul>
+                                        </div>
+>>>>>>> d22f83b9303c28651901c0c70b537935802fdace
                                     </div>
                                 </div>
                             </div>

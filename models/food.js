@@ -1,5 +1,5 @@
-const mongoose = require("mongoose");
-const Schema = mongoose.Schema;
+// const mongoose = require("mongoose");
+// const Schema = mongoose.Schema;
 
 const foodSchema = new Schema({
   foodItem: { type: String, required: true },
@@ -9,6 +9,6 @@ const foodSchema = new Schema({
   date: { type: Date, default: Date.now }
 });
 
-const Food = mongoose.model("Food", foodSchema);
+// const Food = mongoose.model("Food", foodSchema);
 
-module.exports = Food;
+// module.exports = Food;
