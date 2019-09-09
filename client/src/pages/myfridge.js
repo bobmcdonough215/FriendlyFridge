@@ -18,6 +18,7 @@ class myfridge extends Component {
 
     componentDidMount() {
         this.loadFoods();
+        this.checkExpiration();
       }
 
     loadFoods = () => {
@@ -33,6 +34,21 @@ class myfridge extends Component {
             .then(res => this.loadFoods())
             .catch(err => console.log(err));
     };
+
+    checkExpiration = () => {
+        var isExpired = moment(new Date(), 'DD/MM/YYYY').isBefore(this.state.expiration, 'DD/MM/YYYY');
+        console.log(isExpired);
+        var twoDaysBefore = moment().subtract(2, 'days');
+        console.log(twoDaysBefore);
+        // if ()
+
+
+        // console.log(moment(new Date(), 'DD/MM/YYYY').isBefore(this.state.expiration, 'DD/MM/YYYY'));
+        // console.log(this.state.name, format(new Date(this.state.expiration), 'MM/dd/yyyy'), this.state.expiration);
+        // console.log(moment(new Date(), 'DD/MM/YYYY').isBefore(this.state.expiration, 'DD/MM/YYYY'));
+
+
+    }
 
     render() {
         return (
@@ -58,7 +74,6 @@ class myfridge extends Component {
                                     </div>
                                 </div>
                             </div>
-                        </div>
                     )}
                 <Link to="/camera" >
                     <div className="button">
@@ -70,15 +85,6 @@ class myfridge extends Component {
     }
 }
 
-var isExpired = moment(new Date(), 'DD/MM/YYYY').isBefore(this.state.expiration, 'DD/MM/YYYY');
-console.log(isExpired);
-
-if ()
-
-
-// console.log(moment(new Date(), 'DD/MM/YYYY').isBefore(this.state.expiration, 'DD/MM/YYYY'));
-// console.log(this.state.name, format(new Date(this.state.expiration), 'MM/dd/yyyy'), this.state.expiration);
-// console.log(moment(new Date(), 'DD/MM/YYYY').isBefore(this.state.expiration, 'DD/MM/YYYY'));
 
 
 export default myfridge;
