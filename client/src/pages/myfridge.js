@@ -38,11 +38,22 @@ class myfridge extends Component {
             .catch(err => console.log(err));
     };
 
-    checkExpiration = () => {
-        var isExpired = moment(new Date(), 'DD/MM/YYYY').isBefore(this.state.expiration, 'DD/MM/YYYY');
+    checkExpiration = (expirationDate) => {
+        console.log("MOMENT JS");
+        var isExpired = moment(new Date(), 'DD/MM/YYYY').isBefore(expirationDate, 'DD/MM/YYYY');
+        var expiredClass = "";
         console.log(isExpired);
-        var twoDaysBefore = moment().subtract(2, 'days');
-        console.log(twoDaysBefore);
+
+        if(!isExpired) {
+            if(moment(new Date(), 'DD/MM/YYYY').subtract(2, 'days')) {
+                expiredClass = "warning";
+            }
+        } else {
+            expiredClass = "expired";
+        }
+        return expiredClass;
+        // var twoDaysBefore = moment().subtract(2, 'days');
+        // console.log(twoDaysBefore);
         // if ()
 
 
@@ -61,7 +72,8 @@ class myfridge extends Component {
                         <List>
                             {this.state.foods.map(food => (
                                 <ListItem key={food._id}>
-                                    {food.foodItem}
+                                    <span className={this.checkExpiration(food.expirationDate, "MM/DD/YYYY")}>
+                                    {food.foodItem}</span>
                                     <DeleteBtn onClick={() => this.deleteFood(food._id)} />
                                 </ListItem>
                             ))}

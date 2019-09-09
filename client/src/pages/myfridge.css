@@ -32,3 +32,11 @@
 .foodImage{
     border-radius: 100px;
 }
+
+.expired {
+    border: 2px solid red;
+}
+
+.warning {
+    border: 2px solid orange;
+}
