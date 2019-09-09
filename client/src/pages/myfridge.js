@@ -61,7 +61,6 @@ class myfridge extends Component {
                                     </div>
                                 </div>
                             </div>
-                        </div>
                     )}
                 <Link to="/camera" >
                     <div className="button">
@@ -73,10 +72,10 @@ class myfridge extends Component {
     }
 }
 
-var isExpired = moment(new Date(), 'DD/MM/YYYY').isBefore(this.state.expiration, 'DD/MM/YYYY');
-console.log(isExpired);
+// var isExpired = moment(new Date(), 'DD/MM/YYYY').isBefore(this.state.expiration, 'DD/MM/YYYY');
+// console.log(isExpired);
 
-if ()
+
 
 
 // console.log(moment(new Date(), 'DD/MM/YYYY').isBefore(this.state.expiration, 'DD/MM/YYYY'));
