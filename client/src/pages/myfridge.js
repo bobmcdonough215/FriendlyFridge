@@ -74,7 +74,9 @@ class myfridge extends Component {
                                 <ListItem key={food._id}>
                                     <span className={this.checkExpiration(food.expirationDate, "MM/DD/YYYY")}>
                                     {food.foodItem}</span>
-                                    <DeleteBtn onClick={() => this.deleteFood(food._id)} />
+                                    <button onClick={() => this.deleteFood(food._id)}>X</button>
+                                    {/* <DeleteBtn onClick={this.deleteFood(food._id)} /> */}
+                                    
                                 </ListItem>
                             ))}
                         </List>
@@ -100,6 +102,6 @@ class myfridge extends Component {
     }
 }
 
-
+//here deletething
 
 export default myfridge;

@@ -32,11 +32,11 @@ class camera extends Component {
             .catch(err => console.log(err));
     };
 
-    // deleteFood = id => {
-    //     API.deleteFood(id)
-    //         .then(res => this.loadFoods())
-    //         .catch(err => console.log(err));
-    // };
+    deleteFood = id => {
+        API.deleteFood(id)
+            .then(res => this.loadFoods())
+           .catch(err => console.log(err));   
+}
 
     handleFormSubmit = event => {
 
