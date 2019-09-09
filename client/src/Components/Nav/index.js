@@ -50,7 +50,7 @@ class Nav extends React.Component {
                                 <a className="nav-link" href="/myfridge">My Fridge</a>
                             </li>
                             <li className="nav-item">
-                                <a className="nav-link" href="/camera">Camera</a>
+                                <a className="nav-link" href="/additem">Add Food</a>
                             </li>
                             <li className="nav-item">
                                 <a className="nav-link" href="#" onClick={this.logout}>Logout</a>

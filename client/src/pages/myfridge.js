@@ -139,7 +139,7 @@ class myfridge extends Component {
                             </div>
                         </div>
                     )}
-                <Link to="/camera" >
+                <Link to="/additem" >
                     <div className="button">
                         <AddFoodBtn />
                     </div>
