@@ -41,6 +41,9 @@ class App extends Component {
           loggedIn: true,
           username: response.data.user.username
         })
+
+        console.log("Logged in?")
+        console.log(this.state.loggedIn);
       } else {
         console.log('Get user: no user');
         this.setState({
@@ -64,21 +67,18 @@ class App extends Component {
               <Redirect to="/login"/>
         )}/>
         <Route
-          path="/login"
+          exact path="/login"
           render={() =>
             <Login
               updateUser={this.updateUser}
             />}
         />
         <Route
-          path="/myfridge"
-          render={() =>
-            (this.state.loggedIn) ?
-            <MyFridge />
-            :
-            <Redirect to="/login"/>
+          exact path="/myfridge"
+            component={MyFridge} />
           }
         />
+        <Route path="/myfridge" component={MyFridge} />
           <Route exact path="/camera" component={camera} />
           <Route exact path="/signup" component={signup} />
         </Switch>
