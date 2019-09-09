@@ -5,6 +5,7 @@ const foodSchema = new Schema({
   foodItem: { type: String, required: true },
   // note: { type: String, required: true },
   expirationDate: String,
+  foodurl: { type: String, required: true },
   date: { type: Date, default: Date.now }
 });
 
