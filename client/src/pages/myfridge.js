@@ -7,7 +7,8 @@ import AddFoodBtn from "../Components/AddFoodBtn";
 import "./myfridge.css";
 import moment from "moment";
 import axios from "axios";
-
+// import images from "../assets/css/img/fridge.jpg"
+// const fridgeImage = require("../assets/css/img/fridge2.jpg");
 
 class myfridge extends Component {
 
@@ -75,11 +76,14 @@ class myfridge extends Component {
 
 
     render() {
-    
+
 
         return (
             <div className="outer-fridge">
                 <h3 className="title-style">Your Fridge</h3>
+                {/* <div>
+                    <img src={fridgeImage} className = "fridgePicture"/>
+                </div> */}
                 {this.state.foods.length ? (
                     <List>
                         {this.state.foods.map(food => (

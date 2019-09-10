@@ -5,7 +5,6 @@ import API from "../utils/API";
 import DeleteBTN from "../Components/DeleteBtn";
 import { List, ListItem } from "../Components/List";
 import moment from "moment";
-import { format } from 'date-fns';
 import "./additem.css";
 import axios from "axios";
 
@@ -133,7 +132,7 @@ class additem extends Component {
                                 </List>
                             ) : (
                                     <div className="results">
-                                        <h3>No Results to Display</h3>
+                                        {/* <h3>No Results to Display</h3> */}
                                     </div>
                                 )}
                         </Col>
