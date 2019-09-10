@@ -111,6 +111,7 @@ app.get("/user", function (req, res) {
 // Route for saving a new Note to the db and associating it with a User
 app.post("/submit", function (req, res) {
   // Create a new Note in the db
+  console.log("/SUBMIT POST:", req.body)
   db.Fridge.create(req.body)
     .then(function (dbFridge) {
       console.log("Fridge: " + dbFridge);

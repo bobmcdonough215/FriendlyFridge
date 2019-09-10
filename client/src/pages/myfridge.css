@@ -8,6 +8,7 @@
     color: white;
     text-align: center;
     margin: 10%;
+    margin-top: -50px;
 }
 
 .outer-fridge {
@@ -33,12 +34,36 @@
 }
 
 .expired {
-    border: 2px solid red;
+    border: 5px solid red;
+    height: 150px;
+    width: 150px;
+    /* opacity: 0.80; */
+    background: black;
+    border-radius: 50%;
+
+
 }
 
 .warning {
-    border: 2px solid orange;
+    border: 5px solid orange;
+    height: 150px;
+    width: 150px;
+    /* opacity: 0.85; */
+    border-radius: 50%;
 }
+
 .fresh{
-    border: 2px solid green;
+    border: 5px solid green;
+    height: 150px;
+    width: 150px;
+    border-radius: 50%;
+
+
 }
+/* .fridgePicture{
+ margin-top: -50px;
+    height: 500px;
+    width: 400px;
+    position: relative;
+    z-index: 10;
+} */
