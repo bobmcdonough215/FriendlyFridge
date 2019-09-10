@@ -19,6 +19,8 @@ If the food item is expired or the user is no longer interested in the food, the
 * bCrypt
 * axios
 * Bootstrap
+* MomentJS
+
 # Authors
 Bob McDonough
 Danit Lentz
