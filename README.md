@@ -1,5 +1,8 @@
 # Friendly Fridge
 Friendly Fridge is a web application that allows users to create a virtual fridge. The user can add food to their virtual fridge along with an expiration date. Depending on how close the food item is to the expiration date, the food item will change to different colors.
+
+ Try it out: https://glacial-brushlands-77323.herokuapp.com/
+
 # Getting Started
 When the user first loads the page, he or she is met with 2 options, login or create new user. When the user creates a new user, the information is sent to mongoDB, allowing them to sign in in future sessions.
 After logging in the user is sent to the add item page. At this page, the user can enter the food item and an expiration date. The user can enter as many items as they please. After they are finished entering food items, the user can view their virtual fridge by clicking on the MyFridge page.
